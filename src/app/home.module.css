@@ -1,0 +1,310 @@
+/* ============================================================
+   Home page
+   ============================================================ */
+
+/* ---- Hero ---- */
+.hero {
+  position: relative;
+  background:
+    radial-gradient(80% 60% at 90% 0%, rgba(217, 156, 43, 0.2), transparent 55%),
+    radial-gradient(70% 80% at 5% 100%, rgba(40, 70, 111, 0.55), transparent 60%),
+    var(--navy-950);
+  color: #fff;
+  overflow: hidden;
+}
+
+.heroGrain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(4.5rem, 3rem + 9vw, 9rem) clamp(3rem, 2rem + 4vw, 5rem);
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.9fr);
+  gap: clamp(2rem, 1rem + 4vw, 5rem);
+  align-items: end;
+}
+
+.heroTitle {
+  font-size: clamp(2.9rem, 1.4rem + 6vw, 6.4rem);
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.heroTitle em {
+  font-style: italic;
+  color: var(--gold-400);
+}
+
+.heroAside {
+  padding-bottom: 0.6rem;
+}
+
+.heroLede {
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.heroActions {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ---- Hero stat strip ---- */
+.stats {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(3rem, 2rem + 4vw, 5rem);
+  padding-top: 2.4rem;
+  border-top: 1px solid var(--navy-line);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.statNum {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 1.2rem + 2vw, 2.8rem);
+  color: var(--gold-400);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.66);
+  line-height: 1.4;
+}
+
+/* ---- Intro band ---- */
+.introBand {
+  background: var(--paper);
+}
+
+.introLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  gap: clamp(1.5rem, 0.5rem + 4vw, 4.5rem);
+  align-items: start;
+}
+
+.introBig {
+  font-size: var(--text-2xl);
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+}
+
+.introBody p {
+  font-size: var(--text-lg);
+  line-height: var(--leading-normal);
+  color: var(--ink-700);
+}
+
+.introBody p + p {
+  margin-top: 1.2rem;
+}
+
+/* ---- Expertise grid ---- */
+.expertise {
+  background: var(--navy-950);
+  color: #fff;
+}
+
+.expGrid {
+  margin-top: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--navy-line);
+  border: 1px solid var(--navy-line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.expCard {
+  position: relative;
+  background: var(--navy-900);
+  padding: clamp(1.7rem, 1rem + 1.5vw, 2.4rem);
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  transition: background var(--dur) var(--ease-out);
+}
+
+.expCard:hover {
+  background: var(--navy-800);
+}
+
+.expIndex {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--gold-500);
+  letter-spacing: 0.08em;
+}
+
+.expTitle {
+  color: #fff;
+  font-size: var(--text-xl);
+  margin: 0.7rem 0 0.7rem;
+}
+
+.expDesc {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.66);
+  line-height: 1.58;
+  flex: 1;
+}
+
+.expLink {
+  margin-top: 1.3rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--gold-400);
+}
+
+.expLink svg {
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.expCard:hover .expLink svg {
+  transform: translateX(4px);
+}
+
+/* ---- Approach / why ---- */
+.approach {
+  background: var(--paper-2);
+}
+
+.approachGrid {
+  margin-top: clamp(2rem, 1rem + 3vw, 3.5rem);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+}
+
+.approachCard {
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.6rem, 1rem + 1.5vw, 2.3rem);
+  box-shadow: var(--shadow-card);
+}
+
+.approachNum {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--gold-600);
+}
+
+.approachTitle {
+  font-size: var(--text-lg);
+  margin: 0.7rem 0 0.6rem;
+}
+
+.approachText {
+  font-size: 0.95rem;
+  color: var(--ink-700);
+  line-height: 1.62;
+}
+
+/* ---- Closing ---- */
+.closing {
+  position: relative;
+  background:
+    radial-gradient(100% 120% at 50% -20%, rgba(217, 156, 43, 0.2), transparent 60%),
+    var(--navy-900);
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+}
+
+.closingInner {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(4rem, 3rem + 6vw, 7.5rem);
+  max-width: 48rem;
+  margin-inline: auto;
+}
+
+.closingTitle {
+  color: #fff;
+  font-size: var(--text-3xl);
+  margin-top: 1.2rem;
+}
+
+.closingTitle em {
+  font-style: italic;
+  color: var(--gold-400);
+}
+
+.closingBody {
+  margin-top: 1.4rem;
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.closingActions {
+  margin-top: 2.4rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 1000px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 1.8rem;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1.5rem;
+  }
+
+  .expGrid,
+  .approachGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .introLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .expGrid,
+  .approachGrid {
+    grid-template-columns: 1fr;
+  }
+}

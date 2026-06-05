@@ -1,0 +1,333 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: color-mix(in srgb, var(--navy-950) 88%, transparent);
+  backdrop-filter: saturate(140%) blur(12px);
+  border-bottom: 1px solid var(--navy-line);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  height: 76px;
+}
+
+/* ---- Brand ---- */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: #fff;
+}
+
+.brandMark {
+  width: 30px;
+  height: 30px;
+  flex: none;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.brandName {
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  font-weight: 540;
+  letter-spacing: 0.04em;
+}
+
+.brandSub {
+  font-size: 0.6rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold-400);
+  margin-top: 3px;
+}
+
+/* ---- Desktop nav ---- */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.navLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius);
+  transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+
+.navLink:hover {
+  color: #fff;
+}
+
+.chevron {
+  width: 13px;
+  height: 13px;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+/* ---- Dropdown ---- */
+.dropdown {
+  position: relative;
+}
+
+.dropdown:hover .chevron,
+.dropdown:focus-within .chevron {
+  transform: rotate(180deg);
+}
+
+.panel {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: min(760px, 94vw);
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lift);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+}
+
+/* Bridge the gap so the menu doesn't close when the cursor crosses it. */
+.panel::before {
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: 0;
+  right: 0;
+  height: 16px;
+}
+
+.dropdown:hover .panel,
+.dropdown:focus-within .panel,
+.panel.panelOpen {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Left intro rail */
+.panelAside {
+  position: relative;
+  padding: 1.6rem 1.5rem;
+  background:
+    radial-gradient(120% 100% at 0% 0%, rgba(217, 156, 43, 0.16), transparent 60%),
+    var(--navy-900);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.panelKicker {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-400);
+}
+
+.panelHeadline {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1.15;
+  margin: 0.7rem 0 0.6rem;
+  color: #fff;
+}
+
+.panelBlurb {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.panelAll {
+  margin-top: auto;
+  padding-top: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--gold-400);
+}
+
+.panelAll svg {
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.panelAll:hover svg {
+  transform: translateX(4px);
+}
+
+/* Right list */
+.panelList {
+  padding: 0.6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.15rem;
+  align-content: start;
+}
+
+.panelItem {
+  position: relative;
+  display: block;
+  padding: 0.65rem 0.8rem;
+  border-radius: var(--radius);
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.panelItem::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7rem;
+  bottom: 0.7rem;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--amber);
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.panelItem:hover {
+  background: var(--paper);
+}
+
+.panelItem:hover::before {
+  opacity: 1;
+}
+
+.panelItemTitle {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ink-900);
+}
+
+.panelItemDesc {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--ink-500);
+  margin-top: 3px;
+  line-height: 1.4;
+}
+
+@media (max-width: 1080px) {
+  .panel {
+    grid-template-columns: 1fr;
+    width: min(440px, 92vw);
+  }
+
+  .panelAside {
+    display: none;
+  }
+}
+
+/* ---- Right cluster ---- */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.cta {
+  padding: 0.7rem 1.2rem;
+}
+
+/* ---- Mobile toggle ---- */
+.toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: transparent;
+  border: 1px solid var(--navy-line);
+  border-radius: var(--radius);
+}
+
+/* ---- Mobile sheet ---- */
+.sheet {
+  display: none;
+}
+
+@media (max-width: 940px) {
+  .nav,
+  .actions .cta {
+    display: none;
+  }
+
+  .toggle {
+    display: inline-flex;
+  }
+
+  .sheet {
+    display: block;
+    overflow: hidden;
+    max-height: 0;
+    background: var(--navy-900);
+    border-top: 1px solid var(--navy-line);
+    transition: max-height var(--dur-slow) var(--ease-out);
+  }
+
+  .sheetOpen {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .sheetInner {
+    padding: 1.2rem var(--gutter) 2rem;
+  }
+
+  .sheetLabel {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-400);
+    margin: 1.2rem 0 0.5rem;
+  }
+
+  .sheetLink {
+    display: block;
+    padding: 0.85rem 0;
+    color: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid var(--navy-line);
+    font-size: 1rem;
+  }
+
+  .sheetLink span {
+    display: block;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 2px;
+  }
+
+  .sheetCta {
+    margin-top: 1.6rem;
+    width: 100%;
+  }
+}
