@@ -1,0 +1,53 @@
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.55rem;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 999px;
+}
+
+.light {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.option {
+  background: transparent;
+  border: 0;
+  padding: 0.1rem 0.2rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink-400);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.light .option {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.option:hover {
+  color: var(--ink-700);
+}
+
+.light .option:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.option.active {
+  color: var(--gold-600);
+}
+
+.light .option.active {
+  color: var(--gold-400);
+}
+
+.divider {
+  width: 1px;
+  height: 12px;
+  background: var(--hairline-strong);
+}
+
+.light .divider {
+  background: rgba(255, 255, 255, 0.22);
+}

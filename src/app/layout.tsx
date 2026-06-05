@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
+import { LanguageProvider } from "@/lib/i18n";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
+import { FloatingCta } from "@/components/floating-cta";
+import { ZhNotice } from "@/components/zh-notice";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -35,12 +38,16 @@ export default function RootLayout({
   return (
     <html lang="en-AU" className={`${fraunces.variable} ${inter.variable}`}>
       <body>
-        <a href="#main" className="visually-hidden">
-          Skip to content
-        </a>
-        <SiteNav />
-        <main id="main">{children}</main>
-        <SiteFooter />
+        <LanguageProvider>
+          <a href="#main" className="visually-hidden">
+            Skip to content
+          </a>
+          <SiteNav />
+          <ZhNotice />
+          <main id="main">{children}</main>
+          <SiteFooter />
+          <FloatingCta />
+        </LanguageProvider>
       </body>
     </html>
   );

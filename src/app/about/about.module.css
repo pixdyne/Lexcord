@@ -1,0 +1,54 @@
+.storyGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.8rem, 1rem + 4vw, 4rem);
+  align-items: center;
+}
+
+.storyText {
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+  color: var(--ink-700);
+}
+
+.teamBand {
+  background: var(--paper-2);
+}
+
+.teamGrid {
+  margin-top: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+}
+
+.teamCard {
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.teamBody {
+  padding: 1.2rem 1.4rem 1.5rem;
+}
+
+.teamName {
+  font-size: var(--text-lg);
+}
+
+.teamRole {
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  color: var(--ink-500);
+}
+
+@media (max-width: 860px) {
+  .storyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .teamGrid {
+    grid-template-columns: 1fr;
+  }
+}

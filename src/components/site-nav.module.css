@@ -257,6 +257,10 @@
   padding: 0.7rem 1.2rem;
 }
 
+.sheetToggle {
+  margin-top: 1.6rem;
+}
+
 /* ---- Mobile toggle ---- */
 .toggle {
   display: none;
@@ -277,6 +281,7 @@
 
 @media (max-width: 940px) {
   .nav,
+  .langDesktop,
   .actions .cta {
     display: none;
   }

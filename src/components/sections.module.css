@@ -28,6 +28,35 @@
   max-width: 60rem;
 }
 
+/* Staggered entrance for hero content */
+.heroInner > * {
+  opacity: 0;
+  animation: heroReveal 0.7s var(--ease-out) forwards;
+}
+
+.heroInner > *:nth-child(1) { animation-delay: 0.02s; }
+.heroInner > *:nth-child(2) { animation-delay: 0.12s; }
+.heroInner > *:nth-child(3) { animation-delay: 0.22s; }
+.heroInner > *:nth-child(4) { animation-delay: 0.32s; }
+
+@keyframes heroReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroInner > * {
+    opacity: 1;
+    animation: none;
+  }
+}
+
 .heroTitle {
   font-size: var(--text-hero);
   color: #fff;

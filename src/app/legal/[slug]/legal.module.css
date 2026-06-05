@@ -1,0 +1,31 @@
+.doc {
+  max-width: 72ch;
+}
+
+.lead {
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+  margin-bottom: 2.5rem;
+}
+
+.section {
+  padding-block: 1.4rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.heading {
+  font-size: var(--text-lg);
+  margin-bottom: 0.7rem;
+}
+
+.body {
+  color: var(--ink-700);
+  line-height: 1.7;
+}
+
+.updated {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: var(--ink-400);
+  font-style: italic;
+}

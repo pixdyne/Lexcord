@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { practiceAreas, practiceSummaries } from "@/data/practices";
 import { Reveal } from "@/components/reveal";
+import { PlaceholderText, PlaceholderImage } from "@/components/placeholder";
 import styles from "./home.module.css";
 
 // Grounded in the source document: 7 practice areas, all states & territories,
@@ -12,21 +13,24 @@ const STATS = [
   { num: "PEXA", label: "Registered electronic settlements" },
 ];
 
-const APPROACH = [
+// Why-Lexcord points drawn from the source document's "why choose" sections
+// (property: solicitors not just conveyancers; commercial: commercially-minded,
+// transparent costs; criminal: honest assessment).
+const WHY = [
   {
-    num: "01",
+    icon: "scale",
     title: "Solicitors, not just process",
     text: "Admitted solicitors who can advise on the legal dimensions of a matter — disputes, injunctions, and complex issues — not only the paperwork.",
   },
   {
-    num: "02",
+    icon: "compass",
     title: "Commercially-minded counsel",
     text: "Every piece of advice is calibrated to your real-world outcome. We will tell you when settling, or walking away, is the right call.",
   },
   {
-    num: "03",
+    icon: "shield",
     title: "Honest, upfront, transparent",
-    text: "A frank assessment of your position and clear fee estimates before we spend your money. No surprises at month end.",
+    text: "A frank assessment of your position and clear fee estimates before we spend your money. No open-ended billing surprises.",
   },
 ];
 
@@ -38,6 +42,31 @@ function ArrowRight() {
   );
 }
 
+function WhyIcon({ name }: { name: string }) {
+  if (name === "scale") {
+    return (
+      <svg viewBox="0 0 32 32" width="26" height="26" fill="none" aria-hidden="true">
+        <path d="M16 5v22M9 27h14M6 11h20M16 6l-7 5M16 6l7 5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M6 11l-3 7a3 3 0 006 0l-3-7zM26 11l-3 7a3 3 0 006 0l-3-7z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+  if (name === "compass") {
+    return (
+      <svg viewBox="0 0 32 32" width="26" height="26" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="11" stroke="currentColor" strokeWidth="1.7" />
+        <path d="M21 11l-3.5 6.5L11 21l3.5-6.5L21 11z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 32 32" width="26" height="26" fill="none" aria-hidden="true">
+      <path d="M16 4l10 4v7c0 6.5-4.3 10.7-10 13-5.7-2.3-10-6.5-10-13V8l10-4z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+      <path d="M11.5 16l3 3 6-6.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export default function HomePage() {
   return (
     <>
@@ -45,18 +74,24 @@ export default function HomePage() {
       <section className={`${styles.hero} ${styles.heroGrain}`}>
         <div className="container">
           <div className={styles.heroInner}>
-            <span className="eyebrow eyebrow--light">Lexcord Lawyers — Australia-wide</span>
             <div className={styles.heroGrid}>
-              <h1 className={styles.heroTitle}>
-                Clear, considered counsel for <em>life&apos;s</em> significant decisions.
-              </h1>
-              <div className={styles.heroAside}>
-                <p className={styles.heroLede}>
-                  From property and commercial matters to estates, intellectual property, criminal,
-                  and migration law — one firm, advising with precision and plain language across
-                  every Australian state and territory.
+              <div className={styles.heroLeft}>
+                <span className={`eyebrow eyebrow--light ${styles.heroEyebrow}`}>
+                  Lexcord Lawyers — Australia-wide
+                </span>
+                <h1 className={`${styles.heroTitle} ${styles.heroFade}`}>
+                  <PlaceholderText light tag="Headline">
+                    Firm headline pending — e.g. clear, considered counsel for life&apos;s
+                    significant decisions.
+                  </PlaceholderText>
+                </h1>
+                <p className={`${styles.heroLede} ${styles.heroFade} ${styles.heroFade2}`}>
+                  <PlaceholderText light>
+                    Homepage introduction pending. This connective copy is not part of the supplied
+                    document. The firm advises across seven practice areas Australia-wide.
+                  </PlaceholderText>
                 </p>
-                <div className={styles.heroActions}>
+                <div className={`${styles.heroActions} ${styles.heroFade} ${styles.heroFade3}`}>
                   <Link href="/contact" className="btn btn--primary">
                     Book a consultation <ArrowRight />
                   </Link>
@@ -64,6 +99,9 @@ export default function HomePage() {
                     Explore our expertise
                   </a>
                 </div>
+              </div>
+              <div className={`${styles.heroMedia} ${styles.heroFade} ${styles.heroFade2}`}>
+                <PlaceholderImage label="Firm / office photography" light ratio="4 / 5" />
               </div>
             </div>
 
@@ -84,18 +122,14 @@ export default function HomePage() {
         <div className="container">
           <Reveal className={styles.introLayout} as="div">
             <p className={styles.introBig}>
-              Legal problems rarely arrive on a convenient schedule.
+              <PlaceholderText tag="Intro">Opening statement pending firm copy.</PlaceholderText>
             </p>
             <div className={styles.introBody}>
               <p>
-                Whether you are buying your first home, protecting what your business has created,
-                planning for the people you love, or navigating a charge that puts everything at
-                stake — what you need first is a clear-eyed view of where you stand.
-              </p>
-              <p>
-                Lexcord brings the full breadth of a general practice together with the depth of
-                specialist counsel. We tell you what the law requires, what your options are, and
-                what it will cost — before you commit.
+                <PlaceholderText>
+                  This introductory section is connective copy, not part of the supplied document.
+                  Replace with the firm&apos;s positioning statement.
+                </PlaceholderText>
               </p>
             </div>
           </Reveal>
@@ -111,27 +145,33 @@ export default function HomePage() {
               Seven practice areas, one standard of care
             </h2>
             <p style={{ color: "rgba(255,255,255,0.72)" }}>
-              Deep capability across the matters that shape Australian businesses and families —
-              handled by solicitors who treat your matter as their own.
+              Deep capability across the matters that shape Australian businesses and families.
             </p>
           </div>
 
           <div className={styles.expGrid}>
             {practiceAreas.map((area, i) => (
-              <Link key={area.slug} href={`/expertise/${area.slug}`} className={styles.expCard}>
-                <span className={styles.expIndex}>{String(i + 1).padStart(2, "0")}</span>
-                <h3 className={styles.expTitle}>{area.navLabel}</h3>
-                <p className={styles.expDesc}>{practiceSummaries[area.slug]}</p>
-                <span className={styles.expLink}>
-                  Learn more <ArrowRight />
-                </span>
-              </Link>
+              <Reveal
+                key={area.slug}
+                as="div"
+                delay={(i % 3) * 70}
+                className={styles.expCell}
+              >
+                <Link href={`/expertise/${area.slug}`} className={styles.expCard}>
+                  <span className={styles.expIndex}>{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className={styles.expTitle}>{area.navLabel}</h3>
+                  <p className={styles.expDesc}>{practiceSummaries[area.slug]}</p>
+                  <span className={styles.expLink}>
+                    Learn more <ArrowRight />
+                  </span>
+                </Link>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Approach */}
+      {/* Why Lexcord — icon cards */}
       <section className={`section ${styles.approach}`}>
         <div className="container">
           <div className="section-head">
@@ -141,18 +181,45 @@ export default function HomePage() {
             </h2>
           </div>
           <div className={styles.approachGrid}>
-            {APPROACH.map((item) => (
-              <article key={item.num} className={styles.approachCard}>
-                <span className={styles.approachNum}>{item.num}</span>
+            {WHY.map((item, i) => (
+              <Reveal key={item.title} as="article" delay={i * 80} className={styles.approachCard}>
+                <span className={styles.approachIcon}>
+                  <WhyIcon name={item.icon} />
+                </span>
                 <h3 className={styles.approachTitle}>{item.title}</h3>
                 <p className={styles.approachText}>{item.text}</p>
-              </article>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Closing */}
+      {/* Media band */}
+      <section className={`section ${styles.mediaBand}`}>
+        <div className="container">
+          <Reveal className={styles.mediaGrid} as="div">
+            <div>
+              <span className="eyebrow">The firm</span>
+              <h2 style={{ fontSize: "var(--text-2xl)", margin: "1rem 0 1rem" }}>
+                People you will actually speak to
+              </h2>
+              <p style={{ color: "var(--ink-700)", fontSize: "var(--text-lg)", lineHeight: 1.5 }}>
+                <PlaceholderText>
+                  Firm story and team introduction pending. Replace with real copy and photography.
+                </PlaceholderText>
+              </p>
+              <div style={{ marginTop: "1.8rem" }}>
+                <Link href="/about" className="btn btn--ghost">
+                  About Lexcord <ArrowRight />
+                </Link>
+              </div>
+            </div>
+            <PlaceholderImage label="Team / portrait photography" ratio="3 / 2" />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Closing — wording from the source document (migration closing) */}
       <section className={styles.closing}>
         <div className="container">
           <div className={styles.closingInner}>

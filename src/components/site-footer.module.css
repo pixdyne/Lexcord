@@ -39,6 +39,10 @@
   max-width: 44ch;
 }
 
+.footToggle {
+  margin-top: 1.6rem;
+}
+
 .colTitle {
   font-size: 0.72rem;
   letter-spacing: 0.18em;

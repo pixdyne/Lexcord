@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactForm } from "./contact-form";
+import { PlaceholderText } from "@/components/placeholder";
 import styles from "./contact.module.css";
 
 export const metadata: Metadata = {
@@ -15,10 +16,16 @@ export default function ContactPage() {
         <div className="container">
           <div className={styles.heroInner}>
             <span className="eyebrow eyebrow--light">Book a consultation</span>
-            <h1 className={styles.heroTitle}>Let&apos;s talk about your matter</h1>
+            <h1 className={styles.heroTitle}>
+              <PlaceholderText light tag="Headline">
+                Contact headline pending — e.g. let&apos;s talk about your matter.
+              </PlaceholderText>
+            </h1>
             <p className={styles.heroLede}>
-              Tell us a little about your situation. We will give you an honest view, explain your
-              options, and tell you what it will cost — with no obligation to proceed.
+              <PlaceholderText light>
+                Intro copy pending firm content. The enquiry form below is functional and routes to
+                the firm once connected.
+              </PlaceholderText>
             </p>
           </div>
         </div>

@@ -3,12 +3,9 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { practiceAreas, practiceSummaries } from "@/data/practices";
+import { useLang } from "@/lib/i18n";
+import { LanguageToggle } from "./language-toggle";
 import styles from "./site-nav.module.css";
-
-const NAV_LINKS = [
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-];
 
 function BrandMark() {
   return (
@@ -24,6 +21,7 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
   const [expOpen, setExpOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { t, areaLabel } = useLang();
 
   const openExpertise = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -35,6 +33,13 @@ export function SiteNav() {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     closeTimer.current = setTimeout(() => setExpOpen(false), 140);
   };
+
+  const navLinks = [
+    { href: "/services", label: t.nav.services },
+    { href: "/resources", label: t.nav.resources },
+    { href: "/about", label: t.nav.about },
+    { href: "/contact", label: t.nav.contact },
+  ];
 
   return (
     <header className={styles.header}>
@@ -60,21 +65,18 @@ export function SiteNav() {
               onClick={() => setExpOpen((v) => !v)}
               onFocus={openExpertise}
             >
-              Expertise
+              {t.nav.expertise}
               <svg className={styles.chevron} viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
             <div className={`${styles.panel} ${expOpen ? styles.panelOpen : ""}`} role="menu">
               <div className={styles.panelAside}>
-                <span className={styles.panelKicker}>Expertise</span>
-                <p className={styles.panelHeadline}>Seven areas, one standard of care</p>
-                <p className={styles.panelBlurb}>
-                  Considered counsel across the matters that shape Australian businesses and
-                  families — handled by solicitors, not just process.
-                </p>
+                <span className={styles.panelKicker}>{t.nav.expertise}</span>
+                <p className={styles.panelHeadline}>{t.nav.panelHeadline}</p>
+                <p className={styles.panelBlurb}>{t.nav.panelBlurb}</p>
                 <Link href="/about" className={styles.panelAll} role="menuitem">
-                  About the firm
+                  {t.nav.panelAbout}
                   <svg viewBox="0 0 20 20" width="14" height="14" fill="none" aria-hidden="true">
                     <path d="M4 10h11M10 5l5 5-5 5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -88,7 +90,7 @@ export function SiteNav() {
                     className={styles.panelItem}
                     role="menuitem"
                   >
-                    <span className={styles.panelItemTitle}>{area.navLabel}</span>
+                    <span className={styles.panelItemTitle}>{areaLabel(area.slug, area.navLabel)}</span>
                     <span className={styles.panelItemDesc}>{practiceSummaries[area.slug]}</span>
                   </Link>
                 ))}
@@ -96,7 +98,7 @@ export function SiteNav() {
             </div>
           </div>
 
-          {NAV_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <Link key={link.href} href={link.href} className={styles.navLink}>
               {link.label}
             </Link>
@@ -104,8 +106,11 @@ export function SiteNav() {
         </nav>
 
         <div className={styles.actions}>
+          <span className={styles.langDesktop}>
+            <LanguageToggle />
+          </span>
           <Link href="/contact" className={`btn btn--primary ${styles.cta}`}>
-            Book a consultation
+            {t.nav.book}
           </Link>
           <button
             className={styles.toggle}
@@ -126,7 +131,7 @@ export function SiteNav() {
 
       <div className={`${styles.sheet} ${open ? styles.sheetOpen : ""}`}>
         <div className={styles.sheetInner}>
-          <p className={styles.sheetLabel}>Expertise</p>
+          <p className={styles.sheetLabel}>{t.nav.expertise}</p>
           {practiceAreas.map((area) => (
             <Link
               key={area.slug}
@@ -134,12 +139,12 @@ export function SiteNav() {
               className={styles.sheetLink}
               onClick={() => setOpen(false)}
             >
-              {area.navLabel}
+              {areaLabel(area.slug, area.navLabel)}
               <span>{practiceSummaries[area.slug]}</span>
             </Link>
           ))}
-          <p className={styles.sheetLabel}>Firm</p>
-          {NAV_LINKS.map((link) => (
+          <p className={styles.sheetLabel}>{t.nav.firm}</p>
+          {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -149,12 +154,15 @@ export function SiteNav() {
               {link.label}
             </Link>
           ))}
+          <div className={styles.sheetToggle}>
+            <LanguageToggle light />
+          </div>
           <Link
             href="/contact"
             className={`btn btn--primary ${styles.sheetCta}`}
             onClick={() => setOpen(false)}
           >
-            Book a consultation
+            {t.nav.book}
           </Link>
         </div>
       </div>

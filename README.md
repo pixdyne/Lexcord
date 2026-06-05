@@ -7,10 +7,10 @@ Visual direction: **editorial-luxury legal** — deep navy authority, warm gold 
 ## Getting started
 
 ```bash
-pnpm install
-pnpm dev        # http://localhost:3000
-pnpm build      # production build (fully static / SSG)
-pnpm start      # serve the production build
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build (fully static / SSG)
+npm run start    # serve the production build
 ```
 
 ## Architecture
