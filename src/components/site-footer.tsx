@@ -1,10 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { practiceAreas } from "@/data/practices";
 import { useLang } from "@/lib/i18n";
 import { LanguageToggle } from "./language-toggle";
 import styles from "./site-footer.module.css";
+
+const EMAIL = "info@lexcord.com.au";
+const PHONE_DISPLAY = "+61 3 7054 5135";
+const PHONE_DIAL = "+61370545135";
+const MAPS = "https://maps.google.com/?q=530+Little+Collins+St+Melbourne+VIC+3000";
 
 export function SiteFooter() {
   const { t, areaLabel, lang } = useLang();
@@ -12,6 +18,7 @@ export function SiteFooter() {
 
   const firmLinks = [
     { href: "/about", label: t.footer.aboutLexcord },
+    { href: "/people", label: lang === "zh" ? "团队" : "Our People" },
     { href: "/services", label: t.nav.services },
     { href: "/resources", label: t.nav.resources },
     { href: "/contact", label: t.footer.contact },
@@ -28,11 +35,14 @@ export function SiteFooter() {
       <div className="container">
         <div className={styles.top}>
           <div className={styles.brandCol}>
-            <span className={styles.brand}>
-              <span className={styles.brandName}>LEXCORD</span>
-            </span>
+            <Image
+              src="/images/brand/lexcord-white.png"
+              alt="Lexcord Lawyers"
+              width={150}
+              height={53}
+              className={styles.logo}
+            />
             <p className={styles.blurb}>{t.footer.blurb}</p>
-            <p className={styles.disclaimer}>{t.footer.disclaimer}</p>
             <div className={styles.footToggle}>
               <LanguageToggle light />
             </div>
@@ -59,7 +69,7 @@ export function SiteFooter() {
               ))}
             </ul>
             <p className={styles.colTitle} style={{ marginTop: "1.6rem" }}>
-              {lang === "zh" ? "法律" : "Legal"}
+              {t.footer.legal}
             </p>
             <ul className={styles.linkList}>
               {legalLinks.map((link, i) => (
@@ -68,6 +78,22 @@ export function SiteFooter() {
                 </li>
               ))}
             </ul>
+          </div>
+
+          <div>
+            <p className={styles.colTitle}>{t.footer.contactTitle}</p>
+            <address className={styles.contact}>
+              <a href={MAPS} target="_blank" rel="noopener noreferrer" className={styles.contactAddr}>
+                {t.footer.address}
+              </a>
+              <p className={styles.lift}>{t.footer.lift}</p>
+              <a href={`tel:${PHONE_DIAL}`} className={styles.contactLine}>
+                {PHONE_DISPLAY}
+              </a>
+              <a href={`mailto:${EMAIL}`} className={styles.contactLine}>
+                {EMAIL}
+              </a>
+            </address>
           </div>
         </div>
 

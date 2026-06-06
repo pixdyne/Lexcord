@@ -123,6 +123,24 @@
   color: var(--gold-600);
 }
 
+.asideLink {
+  color: var(--ink-900);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.asideLink:hover {
+  color: var(--gold-600);
+}
+
+.asideHint {
+  margin-top: 0.6rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--ink-500);
+  padding-left: 0.8rem;
+  border-left: 2px solid var(--gold-500);
+}
+
 .placeholder {
   font-style: italic;
   color: var(--ink-400);

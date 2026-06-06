@@ -35,6 +35,10 @@ interface Dictionary {
     book: string;
     rights: string;
     australiaWide: string;
+    contactTitle: string;
+    address: string;
+    lift: string;
+    legal: string;
   };
   common: {
     ourServices: string;
@@ -134,6 +138,18 @@ interface Dictionary {
       officesValue: string;
       hoursValue: string;
     };
+    people: {
+      heroEyebrow: string;
+      heroTitlePre: string;
+      heroTitleEm: string;
+      heroLede: string;
+      viewProfile: string;
+      qualifications: string;
+      expertise: string;
+      backToPeople: string;
+      contactLabel: string;
+      bookWith: string;
+    };
     legalPending: string;
     placeholderTag: string;
   };
@@ -166,6 +182,10 @@ const DICT: Record<Lang, Dictionary> = {
       book: "Book a consultation",
       rights: "All rights reserved.",
       australiaWide: "Australia-wide",
+      contactTitle: "Contact",
+      address: "1508/530 Little Collins St, Melbourne VIC 3000",
+      lift: "Take the lift to Level 14, then the opposite lift up to Level 15. Turn right as you exit and continue straight ahead.",
+      legal: "Legal",
     },
     common: {
       ourServices: "Our services",
@@ -308,6 +328,19 @@ const DICT: Record<Lang, Dictionary> = {
         hoursValue:
           "Monday – Friday, by appointment. Urgent criminal & bail matters: contact us any time.",
       },
+      people: {
+        heroEyebrow: "Our People",
+        heroTitlePre: "The people behind ",
+        heroTitleEm: "your matter",
+        heroLede:
+          "Lexcord is led by admitted solicitors who treat your matter as their own. Meet the team — more profiles are being added.",
+        viewProfile: "View profile",
+        qualifications: "Qualifications",
+        expertise: "Areas of expertise",
+        backToPeople: "All people",
+        contactLabel: "Contact",
+        bookWith: "Book a consultation",
+      },
       legalPending:
         "This page is a placeholder. The firm's final wording is pending and should be reviewed by a qualified practitioner before publication.",
       placeholderTag: "Placeholder",
@@ -337,6 +370,10 @@ const DICT: Record<Lang, Dictionary> = {
       book: "预约咨询",
       rights: "版权所有。",
       australiaWide: "服务全澳",
+      contactTitle: "联系方式",
+      address: "维多利亚州墨尔本市 Little Collins St 530 号 1508 室,邮编 3000",
+      lift: "电梯坐到 14 楼,对面电梯再上 15 楼,出电梯后右转直走。",
+      legal: "法律",
     },
     common: {
       ourServices: "我们的服务",
@@ -474,6 +511,19 @@ const DICT: Record<Lang, Dictionary> = {
         emailValue: "hello@lexcord.com.au",
         officesValue: "服务全澳各州与领地。办公地址待确认。",
         hoursValue: "周一至周五,需预约。紧急刑事与保释事务:可随时联系我们。",
+      },
+      people: {
+        heroEyebrow: "我们的团队",
+        heroTitlePre: "为您的事务",
+        heroTitleEm: "保驾护航的团队",
+        heroLede:
+          "Lexcord 由正式执业的律师领衔,把您的事务当作自己的事务。认识我们的团队——更多成员简介正在陆续加入。",
+        viewProfile: "查看简介",
+        qualifications: "资历与执业资格",
+        expertise: "专长领域",
+        backToPeople: "返回团队",
+        contactLabel: "联系方式",
+        bookWith: "预约咨询",
       },
       legalPending:
         "本页为占位内容。本所的最终措辞有待确定,发布前应由具资质的执业者审核。",

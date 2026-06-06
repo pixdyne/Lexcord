@@ -29,6 +29,17 @@
   flex: none;
 }
 
+.logo {
+  height: 38px;
+  width: auto;
+}
+
+@media (max-width: 520px) {
+  .logo {
+    height: 32px;
+  }
+}
+
 .brandText {
   display: flex;
   flex-direction: column;

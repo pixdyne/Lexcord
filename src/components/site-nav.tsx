@@ -2,26 +2,17 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { practiceAreas } from "@/data/practices";
 import { useLang } from "@/lib/i18n";
 import { LanguageToggle } from "./language-toggle";
 import styles from "./site-nav.module.css";
 
-function BrandMark() {
-  return (
-    <svg className={styles.brandMark} viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <rect x="1" y="1" width="30" height="30" rx="6" stroke="var(--gold-400)" strokeWidth="1.4" />
-      <path d="M10 9v14h11" stroke="#fff" strokeWidth="2" strokeLinecap="square" />
-      <path d="M19 9l4 0M21 9v8" stroke="var(--gold-400)" strokeWidth="2" strokeLinecap="square" />
-    </svg>
-  );
-}
-
 export function SiteNav() {
   const [open, setOpen] = useState(false);
   const [expOpen, setExpOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const { t, areaLabel } = useLang();
+  const { t, areaLabel, lang } = useLang();
 
   const openExpertise = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -36,6 +27,7 @@ export function SiteNav() {
 
   const navLinks = [
     { href: "/services", label: t.nav.services },
+    { href: "/people", label: lang === "zh" ? "团队" : "Our People" },
     { href: "/resources", label: t.nav.resources },
     { href: "/about", label: t.nav.about },
     { href: "/contact", label: t.nav.contact },
@@ -45,11 +37,14 @@ export function SiteNav() {
     <header className={styles.header}>
       <div className={`container ${styles.bar}`}>
         <Link href="/" className={styles.brand} aria-label="Lexcord Lawyers home">
-          <BrandMark />
-          <span className={styles.brandText}>
-            <span className={styles.brandName}>LEXCORD</span>
-            <span className={styles.brandSub}>Lawyers</span>
-          </span>
+          <Image
+            src="/images/brand/lexcord-white.png"
+            alt="Lexcord Lawyers"
+            width={132}
+            height={47}
+            className={styles.logo}
+            priority
+          />
         </Link>
 
         <nav className={styles.nav} aria-label="Primary">
