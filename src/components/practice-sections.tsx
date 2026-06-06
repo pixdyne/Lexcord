@@ -1,25 +1,19 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import type { PracticeArea } from "@/data/types";
+import { team } from "@/data/people";
 import { renderAccent } from "@/lib/accent";
 import { useLang } from "@/lib/i18n";
 import { Reveal } from "./reveal";
-import { FaqSection } from "./faq";
+import { PlaceholderText, PlaceholderImage } from "./placeholder";
 import styles from "./sections.module.css";
 
 function ArrowRight() {
   return (
     <svg viewBox="0 0 20 20" width="16" height="16" fill="none" aria-hidden="true">
       <path d="M4 10h11M10 5l5 5-5 5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true">
-      <path d="M4 10.5l4 4 8-9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -32,12 +26,14 @@ interface PracticeSectionsProps {
 export function PracticeSections({ area: areaEn, areaZh }: PracticeSectionsProps) {
   const { lang, t } = useLang();
   const area = lang === "zh" ? areaZh : areaEn;
-  const hasProcess = area.process && area.process.length > 0;
-  const hasWhy = area.why && area.why.length > 0;
+  const c = t.common;
+
+  // Solicitors who work across this practice area.
+  const areaTeam = team.filter((m) => !m.placeholder && m.areas.includes(area.slug));
 
   return (
     <>
-      {/* Hero */}
+      {/* Hero — title + overview */}
       <section className={styles.hero}>
         <div className="container">
           <div className={styles.heroInner}>
@@ -49,14 +45,14 @@ export function PracticeSections({ area: areaEn, areaZh }: PracticeSectionsProps
                 {t.nav.book}
               </Link>
               <a href="#services" className="btn btn--ghost-light">
-                {t.common.ourServices}
+                {c.ourServices}
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services */}
+      {/* Sub-services */}
       <section id="services" className="section">
         <div className="container">
           <Reveal className={styles.split} as="div">
@@ -72,9 +68,7 @@ export function PracticeSections({ area: areaEn, areaZh }: PracticeSectionsProps
           <div className={styles.grid}>
             {area.services.map((service, i) => (
               <article key={service.title} className={styles.card}>
-                <span className={styles.cardIndex}>
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+                <span className={styles.cardIndex}>{String(i + 1).padStart(2, "0")}</span>
                 <h3 className={styles.cardTitle}>{service.title}</h3>
                 <p className={styles.cardBody}>{service.body}</p>
               </article>
@@ -83,113 +77,77 @@ export function PracticeSections({ area: areaEn, areaZh }: PracticeSectionsProps
         </div>
       </section>
 
-      {/* Process timeline */}
-      {hasProcess && (
-        <section className={`section ${styles.process}`}>
-          <div className="container">
-            <Reveal className={styles.split} as="div">
-              <div>
-                <span className="eyebrow eyebrow--light">{area.processEyebrow ?? "How We Work"}</span>
-                <h2 style={{ color: "#fff", fontSize: "var(--text-2xl)", marginTop: "1rem" }}>
-                  {area.processHeading}
-                </h2>
-              </div>
-              {area.processIntro && (
-                <p style={{ color: "rgba(255,255,255,0.78)" }}>{area.processIntro}</p>
-              )}
-            </Reveal>
+      {/* Related insights / posts */}
+      <section className={`section ${styles.posts}`}>
+        <div className="container">
+          <div className="section-head">
+            <span className="eyebrow">{c.relatedPosts}</span>
+            <h2 style={{ fontSize: "var(--text-2xl)", marginTop: "1rem" }}>{area.navLabel}</h2>
+            <p>{c.relatedPostsLede}</p>
+          </div>
+          <div className={styles.postGrid}>
+            {[0, 1, 2].map((i) => (
+              <article key={i} className={styles.postCard}>
+                <PlaceholderImage label={area.navLabel} ratio="16 / 9" />
+                <div className={styles.postBody}>
+                  <h3 className={styles.postTitle}>
+                    <PlaceholderText tag={`${t.pages.placeholderTag} ${i + 1}`}>{c.postTitle}</PlaceholderText>
+                  </h3>
+                  <p className={styles.postExcerpt}>{c.postExcerpt}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <div className={styles.timeline}>
-              {area.process!.map((step) => (
-                <div key={step.step} className={styles.step}>
-                  <div className={styles.stepBadge}>{step.step}</div>
-                  <div className={styles.stepBody}>
-                    <h3 className={styles.stepTitle}>{step.title}</h3>
-                    <p className={styles.stepText}>{step.body}</p>
+      {/* Area team + book */}
+      <section className={`section ${styles.areaTeam}`}>
+        <div className="container">
+          <div className="section-head">
+            <span className="eyebrow eyebrow--light">{c.areaTeam}</span>
+            <h2 style={{ color: "#fff", fontSize: "var(--text-2xl)", marginTop: "1rem" }}>
+              {area.navLabel}
+            </h2>
+            <p style={{ color: "rgba(255,255,255,0.72)" }}>{c.areaTeamLede}</p>
+          </div>
+
+          {areaTeam.length > 0 ? (
+            <div className={styles.teamRow}>
+              {areaTeam.map((m) => (
+                <Link key={m.slug} href={`/people/${m.slug}`} className={styles.teamCard}>
+                  <div className={styles.teamPhoto}>
+                    {m.photo && <Image src={m.photo} alt={m.name} fill sizes="220px" />}
                   </div>
-                </div>
+                  <div className={styles.teamInfo}>
+                    <h3 className={styles.teamName}>{m.name}</h3>
+                    <span className={styles.teamRole}>{lang === "zh" ? m.roleZh : m.role}</span>
+                    <span className={styles.teamLink}>
+                      {c.viewProfile} <ArrowRight />
+                    </span>
+                  </div>
+                </Link>
               ))}
+              <Link href="/contact" className={styles.teamBook}>
+                <span className={styles.teamBookIcon} aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none">
+                    <path d="M4 5h16v11H7l-3 3V5z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+                  </svg>
+                </span>
+                <span className={styles.teamBookText}>{t.nav.book}</span>
+                <ArrowRight />
+              </Link>
             </div>
-          </div>
-        </section>
-      )}
-
-      {/* Extra: tags or life stages */}
-      {area.extra?.variant === "tags" && (
-        <section className="section">
-          <div className="container">
-            <div className="section-head">
-              <span className="eyebrow">{area.extra.eyebrow}</span>
-              <h2 style={{ fontSize: "var(--text-2xl)", marginTop: "1rem" }}>{area.extra.heading}</h2>
-              {area.extra.intro && <p>{area.extra.intro}</p>}
+          ) : (
+            <div className={styles.teamEmpty}>
+              <p>{c.areaTeamEmpty}</p>
+              <Link href="/contact" className="btn btn--primary">
+                {t.nav.book} <ArrowRight />
+              </Link>
             </div>
-            <div className={styles.tagGrid}>
-              {area.extra.tags!.map((tag) => (
-                <article key={tag.title} className={styles.tagCard}>
-                  <h3 className={styles.tagCardTitle}>{tag.title}</h3>
-                  <p className={styles.tagCardBody}>{tag.body}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {area.extra?.variant === "stages" && (
-        <section className={`section ${styles.stagesWrap}`}>
-          <div className="container">
-            <div className="section-head">
-              <span className="eyebrow eyebrow--light">{area.extra.eyebrow}</span>
-              <h2 style={{ color: "#fff", fontSize: "var(--text-2xl)", marginTop: "1rem" }}>
-                {area.extra.heading}
-              </h2>
-              {area.extra.intro && <p style={{ color: "rgba(255,255,255,0.78)" }}>{area.extra.intro}</p>}
-            </div>
-            <div className={styles.stages}>
-              {area.extra.stages!.map((stage) => (
-                <div key={stage.marker} className={styles.stage}>
-                  <div className={styles.stageMarker}>{stage.marker}</div>
-                  <span className={styles.stageKicker}>{stage.kicker}</span>
-                  <h3 className={styles.stageTitle}>{stage.title}</h3>
-                  <p className={styles.stageText}>{stage.body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Why choose */}
-      {hasWhy && (
-        <section className={`section ${styles.why}`}>
-          <div className="container">
-            <div className="section-head">
-              <span className="eyebrow">{t.common.whyChoose}</span>
-              <h2 style={{ fontSize: "var(--text-2xl)", marginTop: "1rem" }}>{area.whyHeading}</h2>
-              {area.whyIntro && <p>{area.whyIntro}</p>}
-            </div>
-            <div className={styles.whyGrid}>
-              {area.why!.map((point) => (
-                <article key={point.title} className={styles.whyCard}>
-                  <span className={styles.whyIcon}>
-                    <CheckIcon />
-                  </span>
-                  <h3 className={styles.whyTitle}>{point.title}</h3>
-                  <p className={styles.whyText}>{point.body}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* FAQ */}
-      <FaqSection
-        eyebrow={area.faqEyebrow}
-        heading={area.faqHeading}
-        intro={area.faqIntro}
-        faqs={area.faqs}
-      />
+          )}
+        </div>
+      </section>
 
       {/* Closing CTA */}
       <section className={styles.closing}>

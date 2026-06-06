@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { practiceAreas } from "@/data/practices";
 import { useLang } from "@/lib/i18n";
 import { PlaceholderText, PlaceholderImage } from "@/components/placeholder";
@@ -49,7 +50,9 @@ export function AboutContent() {
                 <PlaceholderText tag={tag}>{a.storyBody}</PlaceholderText>
               </p>
             </div>
-            <PlaceholderImage label={a.storyEyebrow} ratio="4 / 3" />
+            <div className={styles.officeImg}>
+              <Image src="/images/office/office-1.jpg" alt="Lexcord office" fill sizes="(max-width: 860px) 100vw, 50vw" />
+            </div>
           </div>
         </div>
       </section>

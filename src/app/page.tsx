@@ -1,16 +1,34 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { practiceAreas } from "@/data/practices";
+import { team } from "@/data/people";
 import { useLang } from "@/lib/i18n";
 import { Reveal } from "@/components/reveal";
-import { PlaceholderText, PlaceholderImage } from "@/components/placeholder";
+import { PlaceholderText } from "@/components/placeholder";
 import styles from "./home.module.css";
+
+const HERO_IMG = "/images/office/office-5.jpg";
+const CONTACT_IMG = "/images/office/office-3.jpg";
+const MAPS = "https://maps.google.com/?q=530+Little+Collins+St+Melbourne+VIC+3000";
+const EMAIL = "info@lexcord.com.au";
+const PHONE_DISPLAY = "+61 3 7054 5135";
+const PHONE_DIAL = "+61370545135";
 
 function ArrowRight() {
   return (
     <svg viewBox="0 0 20 20" width="16" height="16" fill="none" aria-hidden="true">
       <path d="M4 10h11M10 5l5 5-5 5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function PersonIcon() {
+  return (
+    <svg viewBox="0 0 48 48" width="40" height="40" fill="none" aria-hidden="true">
+      <circle cx="24" cy="18" r="8" stroke="currentColor" strokeWidth="2" />
+      <path d="M10 40c0-7.7 6.3-14 14-14s14 6.3 14 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }
@@ -40,9 +58,19 @@ function WhyIcon({ index }: { index: number }) {
   );
 }
 
+function QuoteMark() {
+  return (
+    <svg viewBox="0 0 40 32" width="34" height="28" fill="currentColor" aria-hidden="true">
+      <path d="M0 32V18C0 8 5 1.6 15 0l2 5C11 6.5 8 10 8 15h6v17H0zm22 0V18C22 8 27 1.6 37 0l2 5c-6 1.5-9 5-9 10h6v17H22z" />
+    </svg>
+  );
+}
+
 export default function HomePage() {
   const { t, areaLabel, lang } = useLang();
   const h = t.pages.home;
+  const tag = t.pages.placeholderTag;
+
   const stats = [
     { num: "7", label: h.statsAreas },
     { num: lang === "zh" ? "全澳" : "All", label: h.statsStates },
@@ -52,47 +80,41 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className={`${styles.hero} ${styles.heroGrain}`}>
+      {/* Hero — photography-led */}
+      <section className={styles.hero}>
+        <div className={styles.heroMedia}>
+          <Image src={HERO_IMG} alt="" fill priority sizes="100vw" className={styles.heroImg} />
+          <div className={styles.heroScrim} />
+        </div>
         <div className="container">
           <div className={styles.heroInner}>
-            <div className={styles.heroGrid}>
-              <div className={styles.heroLeft}>
-                <span className={`eyebrow eyebrow--light ${styles.heroEyebrow}`}>
-                  {h.heroEyebrow}
-                </span>
-                <h1 className={`${styles.heroTitle} ${styles.heroFade}`}>
-                  <PlaceholderText light tag={t.pages.placeholderTag}>
-                    {h.heroTitle}
-                  </PlaceholderText>
-                </h1>
-                <p className={`${styles.heroLede} ${styles.heroFade} ${styles.heroFade2}`}>
-                  <PlaceholderText light tag={t.pages.placeholderTag}>
-                    {h.heroLede}
-                  </PlaceholderText>
-                </p>
-                <div className={`${styles.heroActions} ${styles.heroFade} ${styles.heroFade3}`}>
-                  <Link href="/contact" className="btn btn--primary">
-                    {t.nav.book} <ArrowRight />
-                  </Link>
-                  <a href="#expertise" className="btn btn--ghost-light">
-                    {h.explore}
-                  </a>
-                </div>
-              </div>
-              <div className={`${styles.heroMedia} ${styles.heroFade} ${styles.heroFade2}`}>
-                <PlaceholderImage label={h.firmHeading} light ratio="4 / 5" />
-              </div>
+            <span className={`eyebrow eyebrow--light ${styles.heroEyebrow}`}>{h.heroEyebrow}</span>
+            <h1 className={styles.heroTitle}>
+              <PlaceholderText light tag="Headline">
+                {h.heroTitle}
+              </PlaceholderText>
+            </h1>
+            <p className={styles.heroLede}>
+              <PlaceholderText light tag={tag}>
+                {h.heroLede}
+              </PlaceholderText>
+            </p>
+            <div className={styles.heroActions}>
+              <Link href="/contact" className="btn btn--primary">
+                {t.nav.book} <ArrowRight />
+              </Link>
+              <Link href="/services" className="btn btn--ghost-light">
+                {h.explore}
+              </Link>
             </div>
-
-            <div className={styles.stats}>
-              {stats.map((stat) => (
-                <div key={stat.label} className={styles.stat}>
-                  <span className={styles.statNum}>{stat.num}</span>
-                  <span className={styles.statLabel}>{stat.label}</span>
-                </div>
-              ))}
-            </div>
+          </div>
+          <div className={styles.stats}>
+            {stats.map((stat) => (
+              <div key={stat.label} className={styles.stat}>
+                <span className={styles.statNum}>{stat.num}</span>
+                <span className={styles.statLabel}>{stat.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -102,11 +124,11 @@ export default function HomePage() {
         <div className="container">
           <Reveal className={styles.introLayout} as="div">
             <p className={styles.introBig}>
-              <PlaceholderText tag={t.pages.placeholderTag}>{h.introBig}</PlaceholderText>
+              <PlaceholderText tag={tag}>{h.introBig}</PlaceholderText>
             </p>
             <div className={styles.introBody}>
               <p>
-                <PlaceholderText tag={t.pages.placeholderTag}>{h.introBody}</PlaceholderText>
+                <PlaceholderText tag={tag}>{h.introBody}</PlaceholderText>
               </p>
             </div>
           </Reveal>
@@ -123,7 +145,6 @@ export default function HomePage() {
             </h2>
             <p style={{ color: "rgba(255,255,255,0.72)" }}>{h.expertiseLede}</p>
           </div>
-
           <div className={styles.expGrid}>
             {practiceAreas.map((area, i) => (
               <Reveal key={area.slug} as="div" delay={(i % 3) * 70} className={styles.expCell}>
@@ -141,7 +162,56 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Lexcord — icon cards */}
+      {/* People preview */}
+      <section className={`section ${styles.peopleBand}`}>
+        <div className="container">
+          <div className={styles.peopleHead}>
+            <div>
+              <span className="eyebrow">{h.peopleEyebrow}</span>
+              <h2 style={{ fontSize: "var(--text-2xl)", margin: "1rem 0 0.8rem" }}>{h.peopleHeading}</h2>
+              <p style={{ color: "var(--muted)", maxWidth: "44ch", fontSize: "var(--text-lg)", lineHeight: 1.4 }}>
+                {h.peopleLede}
+              </p>
+            </div>
+            <Link href="/people" className="btn btn--ghost">
+              {h.peopleCta} <ArrowRight />
+            </Link>
+          </div>
+
+          <div className={styles.peopleGrid}>
+            {team.slice(0, 4).map((m) => {
+              const inner = (
+                <>
+                  <div className={styles.peoplePhoto}>
+                    {m.photo ? (
+                      <Image src={m.photo} alt={m.name} fill sizes="(max-width: 900px) 50vw, 280px" />
+                    ) : (
+                      <div className={styles.peopleEmpty}>
+                        <PersonIcon />
+                      </div>
+                    )}
+                  </div>
+                  <div className={styles.peopleInfo}>
+                    <h3 className={styles.peopleName}>
+                      {m.placeholder ? (lang === "zh" ? "成员待加入" : "Name pending") : m.name}
+                    </h3>
+                    <span className={styles.peopleRole}>{lang === "zh" ? m.roleZh : m.role}</span>
+                  </div>
+                </>
+              );
+              return m.placeholder ? (
+                <div key={m.slug} className={`${styles.peopleCard} ${styles.peopleCardEmpty}`}>{inner}</div>
+              ) : (
+                <Link key={m.slug} href={`/people/${m.slug}`} className={styles.peopleCard}>
+                  {inner}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Lexcord */}
       <section className={`section ${styles.approach}`}>
         <div className="container">
           <div className="section-head">
@@ -162,45 +232,94 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Media band */}
-      <section className={`section ${styles.mediaBand}`}>
+      {/* Insights / journal preview */}
+      <section className={`section ${styles.journal}`}>
         <div className="container">
-          <Reveal className={styles.mediaGrid} as="div">
+          <div className={styles.peopleHead}>
             <div>
-              <span className="eyebrow">{h.firmEyebrow}</span>
-              <h2 style={{ fontSize: "var(--text-2xl)", margin: "1rem 0 1rem" }}>{h.firmHeading}</h2>
-              <p style={{ color: "var(--ink-700)", fontSize: "var(--text-lg)", lineHeight: 1.5 }}>
-                <PlaceholderText tag={t.pages.placeholderTag}>{h.firmBody}</PlaceholderText>
+              <span className="eyebrow">{h.journalEyebrow}</span>
+              <h2 style={{ fontSize: "var(--text-2xl)", margin: "1rem 0 0.8rem" }}>{h.journalHeading}</h2>
+              <p style={{ color: "var(--muted)", maxWidth: "46ch", fontSize: "var(--text-lg)", lineHeight: 1.4 }}>
+                {h.journalLede}
               </p>
-              <div style={{ marginTop: "1.8rem" }}>
-                <Link href="/about" className="btn btn--ghost">
-                  {h.aboutCta} <ArrowRight />
-                </Link>
-              </div>
             </div>
-            <PlaceholderImage label={h.firmHeading} ratio="3 / 2" />
-          </Reveal>
+            <Link href="/resources" className="btn btn--ghost">
+              {h.journalCta} <ArrowRight />
+            </Link>
+          </div>
+          <div className={styles.journalGrid}>
+            {practiceAreas.slice(0, 3).map((area, i) => (
+              <Link key={area.slug} href="/resources" className={styles.journalCard}>
+                <span className={styles.journalCat}>{areaLabel(area.slug, area.navLabel)}</span>
+                <h3 className={styles.journalTitle}>
+                  <PlaceholderText tag={`${tag} ${i + 1}`}>{t.pages.resources.cardTitle}</PlaceholderText>
+                </h3>
+                <p className={styles.journalExcerpt}>{t.pages.resources.cardExcerpt}</p>
+                <span className={styles.journalMeta}>{t.pages.resources.cardMeta}</span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Closing — wording from the source document (migration closing) */}
-      <section className={styles.closing}>
+      {/* Testimonials */}
+      <section className={`section ${styles.testimonials}`}>
         <div className="container">
-          <div className={styles.closingInner}>
+          <div className="section-head" style={{ marginInline: "auto", textAlign: "center" }}>
             <span className="eyebrow eyebrow--light" style={{ justifyContent: "center" }}>
-              {h.closingEyebrow}
+              {h.testimonialEyebrow}
             </span>
-            <h2 className={styles.closingTitle}>
-              {h.closingTitlePre}
-              <em>{h.closingTitleEm}</em>
-              {h.closingTitlePost}
+            <h2 style={{ color: "#fff", fontSize: "var(--text-2xl)", marginTop: "1rem" }}>
+              {h.testimonialHeading}
             </h2>
-            <p className={styles.closingBody}>{h.closingBody}</p>
-            <div className={styles.closingActions}>
-              <Link href="/contact" className="btn btn--primary">
-                {t.nav.book} <ArrowRight />
-              </Link>
-            </div>
+          </div>
+          <div className={styles.quoteGrid}>
+            {h.testimonials.map((tm, i) => (
+              <figure key={i} className={styles.quoteCard}>
+                <span className={styles.quoteMark}>
+                  <QuoteMark />
+                </span>
+                <blockquote className={styles.quoteText}>
+                  <PlaceholderText light tag={tag}>{tm.quote}</PlaceholderText>
+                </blockquote>
+                <figcaption className={styles.quoteName}>
+                  {tm.name} <span>· {tm.detail}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact band */}
+      <section className={styles.contactBand}>
+        <div className={styles.contactGrid}>
+          <div className={styles.contactMedia}>
+            <Image src={CONTACT_IMG} alt="Lexcord office" fill sizes="(max-width: 900px) 100vw, 50vw" className={styles.contactImg} />
+          </div>
+          <div className={styles.contactInfo}>
+            <span className="eyebrow">{h.contactEyebrow}</span>
+            <h2 className={styles.contactHeading}>{h.contactHeading}</h2>
+            <p className={styles.contactLede}>{h.contactLede}</p>
+            <dl className={styles.contactList}>
+              <div>
+                <dt>{lang === "zh" ? "地址" : "Address"}</dt>
+                <dd>
+                  <a href={MAPS} target="_blank" rel="noopener noreferrer">{t.footer.address}</a>
+                </dd>
+              </div>
+              <div>
+                <dt>{lang === "zh" ? "电话" : "Phone"}</dt>
+                <dd><a href={`tel:${PHONE_DIAL}`}>{PHONE_DISPLAY}</a></dd>
+              </div>
+              <div>
+                <dt>{lang === "zh" ? "邮箱" : "Email"}</dt>
+                <dd><a href={`mailto:${EMAIL}`}>{EMAIL}</a></dd>
+              </div>
+            </dl>
+            <Link href="/contact" className="btn btn--primary">
+              {t.nav.book} <ArrowRight />
+            </Link>
           </div>
         </div>
       </section>

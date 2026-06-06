@@ -45,6 +45,14 @@ interface Dictionary {
     whyChoose: string;
     bookConsultation: string;
     learnMore: string;
+    relatedPosts: string;
+    relatedPostsLede: string;
+    postTitle: string;
+    postExcerpt: string;
+    areaTeam: string;
+    areaTeamLede: string;
+    areaTeamEmpty: string;
+    viewProfile: string;
   };
   /** Standard Chinese names for the practice areas (display only). */
   areaZh: Record<string, string>;
@@ -77,6 +85,20 @@ interface Dictionary {
       closingTitleEm: string;
       closingTitlePost: string;
       closingBody: string;
+      peopleEyebrow: string;
+      peopleHeading: string;
+      peopleLede: string;
+      peopleCta: string;
+      journalEyebrow: string;
+      journalHeading: string;
+      journalLede: string;
+      journalCta: string;
+      testimonialEyebrow: string;
+      testimonialHeading: string;
+      testimonials: { quote: string; name: string; detail: string }[];
+      contactEyebrow: string;
+      contactHeading: string;
+      contactLede: string;
     };
     services: {
       heroEyebrow: string;
@@ -192,6 +214,14 @@ const DICT: Record<Lang, Dictionary> = {
       whyChoose: "Why Choose Lexcord",
       bookConsultation: "Book a consultation",
       learnMore: "Learn more",
+      relatedPosts: "Related insights",
+      relatedPostsLede: "Plain-language guidance on this area — articles pending the firm's real publications.",
+      postTitle: "Article title goes here",
+      postExcerpt: "A short standfirst summarising the article will appear here once content is supplied.",
+      areaTeam: "Your legal team",
+      areaTeamLede: "The solicitors who handle these matters. Book a consultation to get started.",
+      areaTeamEmpty: "Team profiles for this area are being added. Contact us and we will connect you with the right solicitor.",
+      viewProfile: "View profile",
     },
     areaZh: {},
     summaries: {
@@ -256,6 +286,27 @@ const DICT: Record<Lang, Dictionary> = {
         closingTitlePost: ", changes everything.",
         closingBody:
           "Book a confidential consultation. We will assess your situation honestly and map out your options — with no obligation to proceed.",
+        peopleEyebrow: "Our People",
+        peopleHeading: "The people behind your matter",
+        peopleLede:
+          "Admitted solicitors who treat your matter as their own. Meet the team handling your case.",
+        peopleCta: "Meet the team",
+        journalEyebrow: "Insights",
+        journalHeading: "Guidance, in plain language",
+        journalLede:
+          "Articles and updates on Australian law. Real publications are pending; the layout is shown below.",
+        journalCta: "All resources",
+        testimonialEyebrow: "Client feedback",
+        testimonialHeading: "Trusted by clients across Australia",
+        testimonials: [
+          { quote: "Client testimonial pending — replace with a real review.", name: "Client name", detail: "Matter type" },
+          { quote: "Client testimonial pending — replace with a real review.", name: "Client name", detail: "Matter type" },
+          { quote: "Client testimonial pending — replace with a real review.", name: "Client name", detail: "Matter type" },
+        ],
+        contactEyebrow: "Visit us",
+        contactHeading: "In the heart of Melbourne",
+        contactLede:
+          "Book a confidential consultation at our Little Collins Street office, or speak with us by phone.",
       },
       services: {
         heroEyebrow: "Our Services",
@@ -380,6 +431,14 @@ const DICT: Record<Lang, Dictionary> = {
       whyChoose: "为何选择 Lexcord",
       bookConsultation: "预约咨询",
       learnMore: "了解更多",
+      relatedPosts: "相关资讯",
+      relatedPostsLede: "关于本领域的通俗解读——文章内容有待律所提供真实出版物。",
+      postTitle: "文章标题占位",
+      postExcerpt: "提供内容后,此处将显示概括文章的简短导语。",
+      areaTeam: "您的法律团队",
+      areaTeamLede: "处理此类事务的律师。预约咨询即可开始。",
+      areaTeamEmpty: "该领域的团队简介正在陆续加入。请联系我们,我们会为您对接合适的律师。",
+      viewProfile: "查看简介",
     },
     areaZh: {
       "property-conveyancing": "房产与产权过户",
@@ -445,6 +504,24 @@ const DICT: Record<Lang, Dictionary> = {
         closingTitlePost: "获得正确的建议,会改变一切。",
         closingBody:
           "预约一次保密咨询。我们会诚实评估您的处境,并为您梳理可选方案——无需任何继续委托的义务。",
+        peopleEyebrow: "我们的团队",
+        peopleHeading: "为您的事务保驾护航的团队",
+        peopleLede: "正式执业的律师,把您的事务当作自己的事务。认识为您处理案件的团队。",
+        peopleCta: "了解团队",
+        journalEyebrow: "资讯",
+        journalHeading: "用通俗语言提供指引",
+        journalLede: "关于澳大利亚法律的文章与动态。真实出版内容待提供,以下为版式展示。",
+        journalCta: "全部资讯",
+        testimonialEyebrow: "客户评价",
+        testimonialHeading: "深受全澳客户信赖",
+        testimonials: [
+          { quote: "客户评价待提供——请替换为真实评价。", name: "客户姓名", detail: "事务类型" },
+          { quote: "客户评价待提供——请替换为真实评价。", name: "客户姓名", detail: "事务类型" },
+          { quote: "客户评价待提供——请替换为真实评价。", name: "客户姓名", detail: "事务类型" },
+        ],
+        contactEyebrow: "莅临本所",
+        contactHeading: "坐落于墨尔本市中心",
+        contactLede: "欢迎莅临我们位于 Little Collins Street 的办公室预约保密咨询,或致电与我们联系。",
       },
       services: {
         heroEyebrow: "我们的服务",
