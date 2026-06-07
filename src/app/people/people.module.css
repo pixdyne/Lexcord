@@ -2,99 +2,103 @@
    People — list + detail
    ============================================================ */
 
-/* ---- List grid ---- */
+/* ---- Intro ---- */
+.intro {
+  padding-block: clamp(2.6rem, 2rem + 3vw, 4.5rem) 0;
+}
+
+.introTitle {
+  font-size: var(--text-3xl);
+  margin-top: 1.1rem;
+  max-width: 16ch;
+}
+
+.introLede {
+  margin-top: 1.4rem;
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+/* ---- List grid (Robinson Gill style — round avatars, no filter) ---- */
 .grid {
-  margin-top: clamp(2.5rem, 1.5rem + 3vw, 4rem);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.6rem;
+  gap: clamp(2rem, 1rem + 3vw, 3.2rem) 1.6rem;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  background: var(--card);
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-lg);
+  align-items: center;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.avatar {
+  position: relative;
+  width: clamp(150px, 40vw, 190px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
   overflow: hidden;
+  background:
+    radial-gradient(120% 120% at 50% 20%, var(--mist-soft), var(--mist) 75%);
+  display: grid;
+  place-items: center;
   transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
 }
 
-.cardLink:hover .card {
+.card:hover .avatar {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lift);
 }
 
-.photo {
-  position: relative;
-  aspect-ratio: 4 / 5;
-  background:
-    radial-gradient(120% 90% at 50% 0%, rgba(40, 70, 111, 0.18), transparent 60%),
-    linear-gradient(180deg, var(--navy-800), var(--navy-900));
-  overflow: hidden;
-}
-
-.photo :global(img) {
+.avatar :global(img) {
   object-fit: cover;
   object-position: center top;
 }
 
-.photoEmpty {
-  display: grid;
-  place-items: center;
-  width: 100%;
-  height: 100%;
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.cardBody {
-  padding: 1.3rem 1.4rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  flex: 1;
+.avatarInitials {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 500;
+  color: var(--navy-800);
+  letter-spacing: 0.02em;
 }
 
 .name {
+  margin-top: 1.3rem;
   font-size: var(--text-lg);
 }
 
 .role {
-  font-size: 0.85rem;
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--gold-600);
+  color: var(--navy-600);
 }
 
-.areas {
-  margin-top: 0.5rem;
-  font-size: 0.85rem;
+.specialty {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
   color: var(--ink-500);
-  line-height: 1.5;
 }
 
 .cardCta {
-  margin-top: 1rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.85rem;
+  margin-top: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: var(--gold-600);
+  letter-spacing: 0.04em;
+  color: var(--navy-900);
+  border-bottom: 1.5px solid transparent;
+  transition: border-color var(--dur-fast) var(--ease-out);
 }
 
-.cardCta svg {
-  transition: transform var(--dur-fast) var(--ease-out);
-}
-
-.cardLink:hover .cardCta svg {
-  transform: translateX(4px);
-}
-
-.cardPlaceholder .name,
-.cardPlaceholder .role {
-  color: var(--ink-400);
+.card:hover .cardCta {
+  border-color: var(--navy-900);
 }
 
 /* ============================================================
@@ -102,9 +106,7 @@
    ============================================================ */
 
 .detailHero {
-  background:
-    radial-gradient(110% 80% at 88% -10%, rgba(217, 156, 43, 0.16), transparent 55%),
-    var(--navy-950);
+  background: var(--navy-900);
   color: #fff;
 }
 
@@ -117,13 +119,13 @@
   align-items: center;
   gap: 0.45rem;
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.72);
   margin-bottom: 1.6rem;
   transition: color var(--dur-fast) var(--ease-out);
 }
 
 .back:hover {
-  color: var(--gold-400);
+  color: #fff;
 }
 
 .back svg {
@@ -141,12 +143,18 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--gold-400);
+  color: var(--mist);
+}
+
+.detailSpecialty {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .detailLayout {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
   gap: clamp(2rem, 1rem + 4vw, 4rem);
   align-items: start;
 }
@@ -154,7 +162,7 @@
 /* Left rail */
 .rail {
   position: sticky;
-  top: 100px;
+  top: 120px;
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
@@ -162,17 +170,27 @@
 
 .detailPhoto {
   position: relative;
-  aspect-ratio: 4 / 5;
-  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
   overflow: hidden;
   background:
-    radial-gradient(120% 90% at 50% 0%, rgba(40, 70, 111, 0.2), transparent 60%),
-    linear-gradient(180deg, var(--navy-800), var(--navy-900));
+    radial-gradient(120% 120% at 50% 20%, var(--mist-soft), var(--mist) 75%);
+  display: grid;
+  place-items: center;
 }
 
 .detailPhoto :global(img) {
   object-fit: cover;
   object-position: center top;
+}
+
+.detailInitials {
+  font-family: var(--font-display);
+  font-size: 3.4rem;
+  font-weight: 500;
+  color: var(--navy-800);
 }
 
 .contactCard {
@@ -198,16 +216,17 @@
   font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold-600);
+  color: var(--navy-600);
 }
 
 .contactVal {
   font-size: 0.92rem;
   color: var(--ink-900);
+  word-break: break-word;
 }
 
 .contactVal a:hover {
-  color: var(--gold-600);
+  color: var(--navy-700);
 }
 
 .railCta {
@@ -224,7 +243,7 @@
   font-size: 0.78rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gold-600);
+  color: var(--navy-600);
   padding-bottom: 0.8rem;
   border-bottom: 1px solid var(--hairline-strong);
   margin-bottom: 1.4rem;
@@ -256,7 +275,7 @@
 .qual svg {
   flex: none;
   margin-top: 4px;
-  color: var(--gold-600);
+  color: var(--navy-700);
 }
 
 .areaTags {
@@ -275,13 +294,13 @@
 }
 
 .areaTag:hover {
-  border-color: var(--gold-500);
-  color: var(--gold-600);
+  border-color: var(--navy-600);
+  color: var(--navy-700);
 }
 
 @media (max-width: 1000px) {
   .grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -293,13 +312,15 @@
   .rail {
     position: static;
   }
+}
 
-  .detailPhoto {
-    max-width: 360px;
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 400px) {
   .grid {
     grid-template-columns: 1fr;
   }

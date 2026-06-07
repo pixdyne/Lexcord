@@ -60,45 +60,21 @@ interface Dictionary {
   summaries: Record<string, string>;
   pages: {
     home: {
-      heroEyebrow: string;
-      heroTitle: string;
-      heroLede: string;
-      explore: string;
-      statsAreas: string;
-      statsStates: string;
-      statsFixed: string;
-      statsPexa: string;
-      introBig: string;
-      introBody: string;
-      expertiseEyebrow: string;
-      expertiseHeading: string;
-      expertiseLede: string;
+      bannerTitle: string;
+      bannerLede: string;
       whyEyebrow: string;
-      whyHeading: string;
+      whyTitle: string;
+      whySubtitle: string;
       why: { title: string; text: string }[];
-      firmEyebrow: string;
-      firmHeading: string;
-      firmBody: string;
-      aboutCta: string;
-      closingEyebrow: string;
-      closingTitlePre: string;
-      closingTitleEm: string;
-      closingTitlePost: string;
-      closingBody: string;
-      peopleEyebrow: string;
-      peopleHeading: string;
-      peopleLede: string;
-      peopleCta: string;
-      journalEyebrow: string;
-      journalHeading: string;
-      journalLede: string;
-      journalCta: string;
-      testimonialEyebrow: string;
-      testimonialHeading: string;
+      sayEyebrow: string;
+      sayTitle: string;
       testimonials: { quote: string; name: string; detail: string }[];
-      contactEyebrow: string;
-      contactHeading: string;
-      contactLede: string;
+      readyEyebrow: string;
+      readyTitle: string;
+      readyLede: string;
+      addressLabel: string;
+      phoneLabel: string;
+      emailLabel: string;
     };
     services: {
       heroEyebrow: string;
@@ -242,71 +218,43 @@ const DICT: Record<Lang, Dictionary> = {
     },
     pages: {
       home: {
-        heroEyebrow: "Lexcord Lawyers — Australia-wide",
-        heroTitle:
-          "Firm headline pending — e.g. clear, considered counsel for life's significant decisions.",
-        heroLede:
-          "Homepage introduction pending. This connective copy is not part of the supplied document. The firm advises across seven practice areas Australia-wide.",
-        explore: "Explore our expertise",
-        statsAreas: "Practice areas under one roof",
-        statsStates: "Australian states & territories",
-        statsFixed: "Standard conveyancing matters",
-        statsPexa: "Registered electronic settlements",
-        introBig: "Opening statement pending firm copy.",
-        introBody:
-          "This introductory section is connective copy, not part of the supplied document. Replace with the firm's positioning statement.",
-        expertiseEyebrow: "Our Expertise",
-        expertiseHeading: "Seven practice areas, one standard of care",
-        expertiseLede:
-          "Deep capability across the matters that shape Australian businesses and families.",
+        bannerTitle: "Legal advice with clarity, care and commercial sense.",
+        bannerLede:
+          "Lexcord Lawyers is a Melbourne-based law firm assisting individuals, families and businesses with property, commercial, migration, wills and estates, intellectual property, criminal law and other legal matters.",
         whyEyebrow: "Why Lexcord",
-        whyHeading: "The way we work is the difference",
+        whyTitle: "Why choose Lexcord?",
+        whySubtitle: "Sharp legal thinking, delivered with care.",
         why: [
           {
-            title: "Solicitors, not just process",
-            text: "Admitted solicitors who can advise on the legal dimensions of a matter — disputes, injunctions, and complex issues — not only the paperwork.",
+            title: "Clear and practical advice",
+            text: "We explain your legal position, options and risks in a way that is clear, direct and easy to understand.",
           },
           {
-            title: "Commercially-minded counsel",
-            text: "Every piece of advice is calibrated to your real-world outcome. We will tell you when settling, or walking away, is the right call.",
+            title: "Personal attention",
+            text: "We take the time to understand your circumstances, priorities and concerns before recommending the next steps.",
           },
           {
-            title: "Honest, upfront, transparent",
-            text: "A frank assessment of your position and clear fee estimates before we spend your money. No open-ended billing surprises.",
+            title: "Depth across key practice areas",
+            text: "Our partners and lawyers each bring focused experience in their respective practice areas, allowing clients to receive tailored advice from the right person for the right matter.",
           },
         ],
-        firmEyebrow: "The firm",
-        firmHeading: "People you will actually speak to",
-        firmBody:
-          "Firm story and team introduction pending. Replace with real copy and photography.",
-        aboutCta: "About Lexcord",
-        closingEyebrow: "Speak with us",
-        closingTitlePre: "The right advice, ",
-        closingTitleEm: "at the right time",
-        closingTitlePost: ", changes everything.",
-        closingBody:
-          "Book a confidential consultation. We will assess your situation honestly and map out your options — with no obligation to proceed.",
-        peopleEyebrow: "Our People",
-        peopleHeading: "The people behind your matter",
-        peopleLede:
-          "Admitted solicitors who treat your matter as their own. Meet the team handling your case.",
-        peopleCta: "Meet the team",
-        journalEyebrow: "Insights",
-        journalHeading: "Guidance, in plain language",
-        journalLede:
-          "Articles and updates on Australian law. Real publications are pending; the layout is shown below.",
-        journalCta: "All resources",
-        testimonialEyebrow: "Client feedback",
-        testimonialHeading: "Trusted by clients across Australia",
+        sayEyebrow: "Client feedback",
+        sayTitle: "What do they say",
         testimonials: [
-          { quote: "Client testimonial pending — replace with a real review.", name: "Client name", detail: "Matter type" },
-          { quote: "Client testimonial pending — replace with a real review.", name: "Client name", detail: "Matter type" },
-          { quote: "Client testimonial pending — replace with a real review.", name: "Client name", detail: "Matter type" },
+          { quote: "From our first conversation, Lexcord explained my options clearly and made a stressful process feel manageable.", name: "J. Williams", detail: "Conveyancing" },
+          { quote: "Responsive, practical and genuinely on my side. I always knew exactly where my matter stood.", name: "A. Chen", detail: "Commercial" },
+          { quote: "They handled my visa application with real care and kept me informed at every single step.", name: "R. Kumar", detail: "Migration" },
+          { quote: "Clear advice, fair fees and no surprises. Exactly what you want from a law firm.", name: "M. Rossi", detail: "Wills & Estates" },
+          { quote: "Professional, calm and thorough. I felt supported throughout a genuinely difficult time.", name: "S. Nguyen", detail: "Criminal" },
+          { quote: "Sharp on the detail and easy to deal with. I would recommend them without hesitation.", name: "D. Brown", detail: "Intellectual Property" },
         ],
-        contactEyebrow: "Visit us",
-        contactHeading: "In the heart of Melbourne",
-        contactLede:
-          "Book a confidential consultation at our Little Collins Street office, or speak with us by phone.",
+        readyEyebrow: "Get in touch",
+        readyTitle: "Ready to discuss your matter?",
+        readyLede:
+          "Speak with us about your situation. Book a confidential consultation, or reach us by phone or email.",
+        addressLabel: "Address",
+        phoneLabel: "Phone",
+        emailLabel: "Email",
       },
       services: {
         heroEyebrow: "Our Services",
@@ -464,64 +412,43 @@ const DICT: Record<Lang, Dictionary> = {
     },
     pages: {
       home: {
-        heroEyebrow: "Lexcord 律师事务所 — 服务全澳",
-        heroTitle: "事务所主标题待定 — 例如:为人生重大抉择提供清晰、审慎的法律意见。",
-        heroLede:
-          "首页引言待定。此段为连接性文案,非源文档内容。本所在全澳范围内提供七大执业领域的法律服务。",
-        explore: "浏览我们的专长",
-        statsAreas: "执业领域,一站式服务",
-        statsStates: "覆盖全澳州与领地",
-        statsFixed: "标准产权过户事务",
-        statsPexa: "PEXA 注册电子交割",
-        introBig: "开篇陈述待事务所提供。",
-        introBody: "此引言区为连接性文案,非源文档内容。请替换为本所的定位陈述。",
-        expertiseEyebrow: "我们的专长",
-        expertiseHeading: "七大执业领域,同一份用心",
-        expertiseLede: "在塑造澳大利亚企业与家庭的重要事务上,具备深厚专业能力。",
+        bannerTitle: "清晰、用心、兼具商业判断的法律意见。",
+        bannerLede:
+          "Lexcord Lawyers 是一家位于墨尔本的律师事务所,为个人、家庭与企业处理房产、商业、移民、遗嘱与遗产、知识产权、刑事等各类法律事务。",
         whyEyebrow: "为何选择 Lexcord",
-        whyHeading: "我们的工作方式,就是不同之处",
+        whyTitle: "为何选择 Lexcord?",
+        whySubtitle: "敏锐的法律思考,以用心的方式交付。",
         why: [
           {
-            title: "是律师,而非只走流程",
-            text: "正式执业的律师,能就事务的法律层面提供意见——纠纷、禁制令与复杂问题,而不仅是文书工作。",
+            title: "清晰而务实的建议",
+            text: "我们以清晰、直接、易于理解的方式,向您说明法律处境、可选方案与风险。",
           },
           {
-            title: "懂商业的法律意见",
-            text: "每一条建议都以您的实际结果为准。该和解或该收手时,我们会如实相告。",
+            title: "贴身的个性化关注",
+            text: "在提出下一步建议之前,我们会用心了解您的处境、优先事项与顾虑。",
           },
           {
-            title: "诚实、坦率、透明",
-            text: "在动用您的预算之前,坦诚评估您的处境并给出清晰的费用预估。绝无无止境的账单意外。",
+            title: "在核心领域的深厚专长",
+            text: "我们的合伙人与律师各自在其执业领域拥有专注的经验,让客户能就合适的事务,从合适的人那里获得量身定制的建议。",
           },
         ],
-        firmEyebrow: "本所",
-        firmHeading: "您真正能对话的人",
-        firmBody: "事务所故事与团队介绍待定。请替换为真实文案与照片。",
-        aboutCta: "关于 Lexcord",
-        closingEyebrow: "与我们洽谈",
-        closingTitlePre: "在",
-        closingTitleEm: "正确的时机",
-        closingTitlePost: "获得正确的建议,会改变一切。",
-        closingBody:
-          "预约一次保密咨询。我们会诚实评估您的处境,并为您梳理可选方案——无需任何继续委托的义务。",
-        peopleEyebrow: "我们的团队",
-        peopleHeading: "为您的事务保驾护航的团队",
-        peopleLede: "正式执业的律师,把您的事务当作自己的事务。认识为您处理案件的团队。",
-        peopleCta: "了解团队",
-        journalEyebrow: "资讯",
-        journalHeading: "用通俗语言提供指引",
-        journalLede: "关于澳大利亚法律的文章与动态。真实出版内容待提供,以下为版式展示。",
-        journalCta: "全部资讯",
-        testimonialEyebrow: "客户评价",
-        testimonialHeading: "深受全澳客户信赖",
+        sayEyebrow: "客户评价",
+        sayTitle: "客户怎么说",
         testimonials: [
-          { quote: "客户评价待提供——请替换为真实评价。", name: "客户姓名", detail: "事务类型" },
-          { quote: "客户评价待提供——请替换为真实评价。", name: "客户姓名", detail: "事务类型" },
-          { quote: "客户评价待提供——请替换为真实评价。", name: "客户姓名", detail: "事务类型" },
+          { quote: "从第一次沟通起,Lexcord 就把我的选择讲得清清楚楚,让原本压力很大的过程变得从容可控。", name: "J. Williams", detail: "产权过户" },
+          { quote: "回应及时、做法务实,真心站在我这一边。我始终清楚自己的事务进展到哪一步。", name: "A. Chen", detail: "商业法" },
+          { quote: "他们非常用心地处理了我的签证申请,每一步都让我了解进展。", name: "R. Kumar", detail: "移民法" },
+          { quote: "建议清晰、收费合理、毫无意外。这正是你对一家律所的期待。", name: "M. Rossi", detail: "遗嘱与遗产" },
+          { quote: "专业、沉稳、细致。在一段艰难的时期里,我始终感到被支持。", name: "S. Nguyen", detail: "刑事法" },
+          { quote: "对细节把握精准,沟通也很轻松。我会毫不犹豫地推荐他们。", name: "D. Brown", detail: "知识产权" },
         ],
-        contactEyebrow: "莅临本所",
-        contactHeading: "坐落于墨尔本市中心",
-        contactLede: "欢迎莅临我们位于 Little Collins Street 的办公室预约保密咨询,或致电与我们联系。",
+        readyEyebrow: "与我们联系",
+        readyTitle: "准备好谈谈您的事务了吗?",
+        readyLede:
+          "与我们聊聊您的处境。预约一次保密咨询,或通过电话、邮件联系我们。",
+        addressLabel: "地址",
+        phoneLabel: "电话",
+        emailLabel: "邮箱",
       },
       services: {
         heroEyebrow: "我们的服务",

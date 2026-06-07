@@ -8,6 +8,22 @@ import { useLang } from "@/lib/i18n";
 import { LanguageToggle } from "./language-toggle";
 import styles from "./site-nav.module.css";
 
+const PHONE_DISPLAY = "+61 3 7054 5135";
+const PHONE_DIAL = "+61370545135";
+
+function PhoneIcon() {
+  return (
+    <svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true">
+      <path
+        d="M5 3h3l1.5 4-2 1.5a9 9 0 004 4l1.5-2 4 1.5v3a1.5 1.5 0 01-1.6 1.5A13.5 13.5 0 014.5 5.6 1.5 1.5 0 016 4z"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function SiteNav() {
   const [open, setOpen] = useState(false);
   const [expOpen, setExpOpen] = useState(false);
@@ -25,53 +41,76 @@ export function SiteNav() {
     closeTimer.current = setTimeout(() => setExpOpen(false), 140);
   };
 
-  const navLinks = [
-    { href: "/services", label: t.nav.services },
+  // Primary nav order: About, Expertise (dropdown), People, Resources, Contact.
+  const beforeExpertise = [{ href: "/about", label: t.nav.about }];
+  const afterExpertise = [
     { href: "/people", label: lang === "zh" ? "团队" : "Our People" },
     { href: "/resources", label: t.nav.resources },
-    { href: "/about", label: t.nav.about },
     { href: "/contact", label: t.nav.contact },
   ];
 
   return (
     <header className={styles.header}>
+      {/* Utility bar: language (left), phone + book (right) */}
+      <div className={styles.utility}>
+        <div className={`container ${styles.utilityInner}`}>
+          <LanguageToggle light={false} />
+          <div className={styles.utilityRight}>
+            <a href={`tel:${PHONE_DIAL}`} className={styles.utilityPhone}>
+              <PhoneIcon />
+              <span>{PHONE_DISPLAY}</span>
+            </a>
+            <Link href="/contact" className={styles.utilityBook}>
+              {t.nav.book}
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Main bar: logo + primary nav */}
       <div className={`container ${styles.bar}`}>
         <Link href="/" className={styles.brand} aria-label="Lexcord Lawyers home">
           <Image
-            src="/images/brand/lexcord-white.png"
+            src="/images/brand/lexcord-navy.png"
             alt="Lexcord Lawyers"
-            width={132}
-            height={47}
+            width={176}
+            height={63}
             className={styles.logo}
             priority
           />
         </Link>
 
         <nav className={styles.nav} aria-label="Primary">
+          {beforeExpertise.map((link) => (
+            <Link key={link.href} href={link.href} className={styles.navLink}>
+              {link.label}
+            </Link>
+          ))}
+
           <div
             className={styles.dropdown}
             onMouseEnter={openExpertise}
             onMouseLeave={closeExpertise}
           >
-            <button
+            <Link
+              href="/expertise"
               className={styles.navLink}
               aria-haspopup="true"
               aria-expanded={expOpen}
-              onClick={() => setExpOpen((v) => !v)}
               onFocus={openExpertise}
             >
               {t.nav.expertise}
               <svg className={styles.chevron} viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </button>
+            </Link>
             <div className={`${styles.panel} ${expOpen ? styles.panelOpen : ""}`} role="menu">
               <div className={styles.panelAside}>
                 <span className={styles.panelKicker}>{t.nav.expertise}</span>
                 <p className={styles.panelHeadline}>{t.nav.panelHeadline}</p>
                 <p className={styles.panelBlurb}>{t.nav.panelBlurb}</p>
-                <Link href="/about" className={styles.panelAll} role="menuitem">
-                  {t.nav.panelAbout}
+                <Link href="/expertise" className={styles.panelAll} role="menuitem">
+                  {lang === "zh" ? "全部领域" : "All expertise"}
                   <svg viewBox="0 0 20 20" width="14" height="14" fill="none" aria-hidden="true">
                     <path d="M4 10h11M10 5l5 5-5 5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -93,39 +132,35 @@ export function SiteNav() {
             </div>
           </div>
 
-          {navLinks.map((link) => (
+          {afterExpertise.map((link) => (
             <Link key={link.href} href={link.href} className={styles.navLink}>
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className={styles.actions}>
-          <span className={styles.langDesktop}>
-            <LanguageToggle />
-          </span>
-          <Link href="/contact" className={`btn btn--primary ${styles.cta}`}>
-            {t.nav.book}
-          </Link>
-          <button
-            className={styles.toggle}
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-          >
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
-              {open ? (
-                <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-              ) : (
-                <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-              )}
-            </svg>
-          </button>
-        </div>
+        <button
+          className={styles.toggle}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+        >
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+            {open ? (
+              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+            ) : (
+              <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+            )}
+          </svg>
+        </button>
       </div>
 
+      {/* Mobile sheet */}
       <div className={`${styles.sheet} ${open ? styles.sheetOpen : ""}`}>
         <div className={styles.sheetInner}>
+          <Link href="/about" className={styles.sheetLink} onClick={() => setOpen(false)}>
+            {t.nav.about}
+          </Link>
           <p className={styles.sheetLabel}>{t.nav.expertise}</p>
           {practiceAreas.map((area) => (
             <Link
@@ -138,8 +173,7 @@ export function SiteNav() {
               <span>{t.summaries[area.slug]}</span>
             </Link>
           ))}
-          <p className={styles.sheetLabel}>{t.nav.firm}</p>
-          {navLinks.map((link) => (
+          {afterExpertise.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -149,9 +183,9 @@ export function SiteNav() {
               {link.label}
             </Link>
           ))}
-          <div className={styles.sheetToggle}>
-            <LanguageToggle light />
-          </div>
+          <a href={`tel:${PHONE_DIAL}`} className={styles.sheetLink} onClick={() => setOpen(false)}>
+            {PHONE_DISPLAY}
+          </a>
           <Link
             href="/contact"
             className={`btn btn--primary ${styles.sheetCta}`}

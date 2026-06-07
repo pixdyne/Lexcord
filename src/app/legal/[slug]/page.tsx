@@ -17,6 +17,11 @@ const META: Record<string, { title: string; description: string }> = {
     description:
       "Important information about the general nature of the content on this website and the absence of a lawyer–client relationship.",
   },
+  copyright: {
+    title: "Copyright",
+    description:
+      "Copyright and permitted-use information for the content published on the Lexcord website.",
+  },
 };
 
 export function generateStaticParams() {

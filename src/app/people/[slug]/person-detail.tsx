@@ -24,13 +24,13 @@ function Tick() {
   );
 }
 
-function PersonIcon() {
-  return (
-    <svg viewBox="0 0 48 48" width="56" height="56" fill="none" aria-hidden="true">
-      <circle cx="24" cy="18" r="8" stroke="currentColor" strokeWidth="2" />
-      <path d="M10 40c0-7.7 6.3-14 14-14s14 6.3 14 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    </svg>
-  );
+function initials(name: string): string {
+  return name
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part[0] ?? "")
+    .join("")
+    .toUpperCase();
 }
 
 export function PersonDetail({ slug }: { slug: string }) {
@@ -39,8 +39,9 @@ export function PersonDetail({ slug }: { slug: string }) {
   const member = getMember(slug);
   if (!member) return null;
 
-  const name = member.placeholder && lang === "zh" ? "成员待加入" : member.name;
+  const name = member.name;
   const role = lang === "zh" ? member.roleZh : member.role;
+  const specialty = lang === "zh" ? member.specialtyZh : member.specialty;
   const bio = lang === "zh" ? member.bioZh : member.bio;
   const quals = lang === "zh" ? member.qualificationsZh : member.qualifications;
   const phoneDial = member.phone.replace(/[^+\d]/g, "");
@@ -55,6 +56,7 @@ export function PersonDetail({ slug }: { slug: string }) {
             </Link>
             <h1 className={styles.detailName}>{name}</h1>
             <p className={styles.detailRole}>{role}</p>
+            {specialty && <p className={styles.detailSpecialty}>{specialty}</p>}
           </div>
         </div>
       </section>
@@ -65,11 +67,9 @@ export function PersonDetail({ slug }: { slug: string }) {
             <div className={styles.rail}>
               <div className={styles.detailPhoto}>
                 {member.photo ? (
-                  <Image src={member.photo} alt={name} fill sizes="(max-width: 820px) 360px, 420px" />
+                  <Image src={member.photo} alt={name} fill sizes="300px" />
                 ) : (
-                  <div className={styles.photoEmpty}>
-                    <PersonIcon />
-                  </div>
+                  <span className={styles.detailInitials}>{initials(name)}</span>
                 )}
               </div>
 

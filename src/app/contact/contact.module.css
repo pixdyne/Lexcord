@@ -1,6 +1,6 @@
 .hero {
   background:
-    radial-gradient(110% 80% at 90% -10%, rgba(217, 156, 43, 0.16), transparent 55%),
+    radial-gradient(110% 80% at 90% -10%, rgba(55, 80, 137, 0.16), transparent 55%),
     var(--navy-950);
   color: #fff;
 }

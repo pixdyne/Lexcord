@@ -78,6 +78,24 @@ export const LEGAL: LegalContentMap = {
       sections: ["不构成法律意见", "不构成律师—委托人关系", "信息的准确性", "外部链接"],
     },
   },
+  copyright: {
+    en: {
+      title: "Copyright",
+      intro:
+        "Copyright and permitted-use information for the content published on the Lexcord website.",
+      sections: [
+        "Ownership of content",
+        "Permitted use",
+        "Trade marks and logos",
+        "Requesting permission",
+      ],
+    },
+    zh: {
+      title: "版权声明",
+      intro: "关于 Lexcord 网站所发布内容的版权及许可使用说明。",
+      sections: ["内容的所有权", "许可使用", "商标与标识", "申请授权"],
+    },
+  },
 };
 
 export function LegalContent({ slug }: { slug: string }) {

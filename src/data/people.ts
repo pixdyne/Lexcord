@@ -3,9 +3,12 @@ export interface TeamMember {
   name: string;
   role: string;
   roleZh: string;
-  /** Photo path under /public, or null for an unfilled placeholder slot. */
+  /** Practice focus shown under the role (free text, may sit outside the 7 areas). */
+  specialty?: string;
+  specialtyZh?: string;
+  /** Photo path under /public, or null while the headshot is pending. */
   photo: string | null;
-  /** Practice-area slugs this person works across. */
+  /** Practice-area slugs this person works across (drives the area-team listing). */
   areas: string[];
   email: string;
   phone: string;
@@ -13,22 +16,50 @@ export interface TeamMember {
   qualificationsZh: string[];
   bio: string[];
   bioZh: string[];
-  /** True for not-yet-supplied team slots. */
+  /** True when name/role themselves are not yet supplied. */
   placeholder?: boolean;
 }
 
-const FIRM_EMAIL = "info@lexcord.com.au";
 const FIRM_PHONE = "+61 3 7054 5135";
+
+/** Standard "profile pending" copy for members whose full bio is not yet supplied. */
+function pendingBio(name: string): string[] {
+  return [
+    `Full profile pending. ${name}'s biography, experience and credentials will be published here shortly.`,
+  ];
+}
+
+function pendingBioZh(name: string): string[] {
+  return [`完整简介待提供。${name} 的介绍、经验与执业资格将很快在此发布。`];
+}
 
 export const team: TeamMember[] = [
   {
+    slug: "katherine-ho",
+    name: "Katherine Ho",
+    role: "Principal",
+    roleZh: "主理律师",
+    specialty: "Family Law",
+    specialtyZh: "家庭法",
+    photo: null,
+    areas: [],
+    email: "katherine.ho@lexcord.com.au",
+    phone: FIRM_PHONE,
+    qualifications: [],
+    qualificationsZh: [],
+    bio: pendingBio("Katherine Ho"),
+    bioZh: pendingBioZh("Katherine Ho"),
+  },
+  {
     slug: "elijah-feng",
     name: "Elijah Feng",
-    role: "Solicitor",
-    roleZh: "律师",
+    role: "Director & Solicitor",
+    roleZh: "董事兼律师",
+    specialty: "Migration, Property & Business",
+    specialtyZh: "移民、房产与商业",
     photo: "/images/team/elijah-feng.png",
-    areas: ["migration-law", "criminal-law"],
-    email: FIRM_EMAIL,
+    areas: ["migration-law", "property-conveyancing", "commercial"],
+    email: "elijah.feng@lexcord.com.au",
     phone: FIRM_PHONE,
     qualifications: [
       "Juris Doctor — University of Melbourne",
@@ -59,27 +90,67 @@ export const team: TeamMember[] = [
       "他对澳大利亚各类签证类别有深入了解,透彻掌握签证申请流程、评审标准与政策变化,协助客户进行策略规划,以提高签证获批的机会。他同样擅长处理签证拒签、取消及复杂法律挑战,包括行政上诉仲裁庭(AAT)上诉、联邦法院上诉、签证取消复审,以及 Section 57 自然公正回应。",
     ],
   },
-  ...buildPlaceholders(3, FIRM_EMAIL, FIRM_PHONE),
-];
-
-/** Placeholder team slots — real profiles to be supplied by the firm. */
-function buildPlaceholders(count: number, email: string, phone: string): TeamMember[] {
-  return Array.from({ length: count }, (_, i) => ({
-    slug: `member-${i + 2}`,
-    name: "Name pending",
-    role: "Title pending",
-    roleZh: "职衔待定",
+  {
+    slug: "justin-ho",
+    name: "Justin Ho",
+    role: "Solicitor & Patent Attorney (Taiwan)",
+    roleZh: "律师兼专利代理人(台湾)",
+    specialty: "Intellectual Property",
+    specialtyZh: "知识产权",
     photo: null,
-    areas: [],
-    email,
-    phone,
+    areas: ["intellectual-property"],
+    email: "justin.ho@lexcord.com.au",
+    phone: FIRM_PHONE,
     qualifications: [],
     qualificationsZh: [],
-    bio: ["Profile pending. This team member's biography and credentials will be supplied by the firm."],
-    bioZh: ["简介待定。该团队成员的介绍与资历将由律所提供。"],
-    placeholder: true,
-  }));
-}
+    bio: pendingBio("Justin Ho"),
+    bioZh: pendingBioZh("Justin Ho"),
+  },
+  {
+    slug: "chang-qi",
+    name: "Chang Qi",
+    role: "Solicitor",
+    roleZh: "律师",
+    specialty: "Family & Business",
+    specialtyZh: "家庭与商业",
+    photo: null,
+    areas: ["commercial"],
+    email: "chang.qi@lexcord.com.au",
+    phone: FIRM_PHONE,
+    qualifications: [],
+    qualificationsZh: [],
+    bio: pendingBio("Chang Qi"),
+    bioZh: pendingBioZh("Chang Qi"),
+  },
+  {
+    slug: "taylor-zhang",
+    name: "Taylor Zhang",
+    role: "Paralegal",
+    roleZh: "律师助理",
+    photo: null,
+    areas: [],
+    email: "taylor.zhang@lexcord.com.au",
+    phone: FIRM_PHONE,
+    qualifications: [],
+    qualificationsZh: [],
+    bio: pendingBio("Taylor Zhang"),
+    bioZh: pendingBioZh("Taylor Zhang"),
+  },
+  {
+    slug: "carol-ma",
+    name: "Carol Ma",
+    role: "Paralegal & Lawyer (China)",
+    roleZh: "律师助理兼律师(中国)",
+    photo: null,
+    areas: [],
+    email: "carol.ma@lexcord.com.au",
+    phone: FIRM_PHONE,
+    qualifications: [],
+    qualificationsZh: [],
+    bio: pendingBio("Carol Ma"),
+    bioZh: pendingBioZh("Carol Ma"),
+  },
+];
 
 export const teamBySlug = new Map(team.map((m) => [m.slug, m]));
 

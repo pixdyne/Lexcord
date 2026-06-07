@@ -18,6 +18,79 @@ function ArrowRight() {
   );
 }
 
+/** Per-area line icon for the banner. */
+function AreaIcon({ slug }: { slug: string }) {
+  const common = {
+    viewBox: "0 0 40 40",
+    width: 38,
+    height: 38,
+    fill: "none",
+    "aria-hidden": true as const,
+    stroke: "currentColor",
+    strokeWidth: 1.7,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+  switch (slug) {
+    case "property-conveyancing":
+      return (
+        <svg {...common}>
+          <path d="M7 18L20 8l13 10" />
+          <path d="M10 16v15h20V16" />
+          <path d="M17 31v-7h6v7" />
+        </svg>
+      );
+    case "commercial":
+      return (
+        <svg {...common}>
+          <rect x="6" y="13" width="28" height="19" rx="2" />
+          <path d="M15 13v-3a3 3 0 013-3h4a3 3 0 013 3v3M6 21h28" />
+        </svg>
+      );
+    case "wills-estates":
+      return (
+        <svg {...common}>
+          <path d="M11 6h13l6 6v22H11z" />
+          <path d="M24 6v6h6M15 19h11M15 24h11M15 29h7" />
+        </svg>
+      );
+    case "intellectual-property":
+      return (
+        <svg {...common}>
+          <path d="M20 6a10 10 0 016 18c-1.3 1-2 2-2 3.5V29h-8v-1.5c0-1.5-.7-2.5-2-3.5A10 10 0 0120 6z" />
+          <path d="M16 33h8M17 36h6" />
+        </svg>
+      );
+    case "criminal-law":
+      return (
+        <svg {...common}>
+          <path d="M20 6l11 4v8c0 8-5 13-11 16-6-3-11-8-11-16v-8l11-4z" />
+          <path d="M15 19l3.5 3.5L26 15" />
+        </svg>
+      );
+    case "notary-public":
+      return (
+        <svg {...common}>
+          <circle cx="20" cy="15" r="8" />
+          <path d="M20 23v6M14 33h12M16 13l3 3 5-5" />
+        </svg>
+      );
+    case "migration-law":
+      return (
+        <svg {...common}>
+          <circle cx="20" cy="20" r="13" />
+          <path d="M7 20h26M20 7c4 4 4 22 0 26M20 7c-4 4-4 22 0 26" />
+        </svg>
+      );
+    default:
+      return (
+        <svg {...common}>
+          <circle cx="20" cy="20" r="13" />
+        </svg>
+      );
+  }
+}
+
 interface PracticeSectionsProps {
   area: PracticeArea;
   areaZh: PracticeArea;
@@ -33,20 +106,25 @@ export function PracticeSections({ area: areaEn, areaZh }: PracticeSectionsProps
 
   return (
     <>
-      {/* Hero — title + overview */}
-      <section className={styles.hero}>
+      {/* Banner — coloured band with area icon + title */}
+      <section className={styles.areaBanner}>
         <div className="container">
-          <div className={styles.heroInner}>
-            <span className="eyebrow eyebrow--light">{area.heroEyebrow}</span>
-            <h1 className={styles.heroTitle}>{renderAccent(area.heroTitle)}</h1>
-            <p className={styles.heroLede}>{area.heroLede}</p>
-            <div className={styles.heroActions}>
-              <Link href="/contact" className="btn btn--primary">
-                {t.nav.book}
-              </Link>
-              <a href="#services" className="btn btn--ghost-light">
-                {c.ourServices}
-              </a>
+          <div className={styles.areaBannerInner}>
+            <span className={styles.areaBannerIcon} aria-hidden="true">
+              <AreaIcon slug={area.slug} />
+            </span>
+            <div className={styles.areaBannerText}>
+              <span className={styles.areaKicker}>{area.heroEyebrow}</span>
+              <h1 className={styles.areaTitle}>{area.navLabel}</h1>
+              <p className={styles.areaLede}>{area.heroLede}</p>
+              <div className={styles.areaActions}>
+                <Link href="/contact" className="btn btn--primary">
+                  {t.nav.book} <ArrowRight />
+                </Link>
+                <a href="#services" className="btn btn--ghost">
+                  {c.ourServices}
+                </a>
+              </div>
             </div>
           </div>
         </div>
